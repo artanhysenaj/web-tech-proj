@@ -25,7 +25,7 @@ const LoginPage = (props) => {
       });
     } else if (!loading && error) {
       toast.update(loaderRef.current, {
-        render: error.message,
+        render: error.message || "Something went wrong",
         type: "error",
         isLoading: loading,
         autoClose: true,

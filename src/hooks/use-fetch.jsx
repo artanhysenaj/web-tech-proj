@@ -14,7 +14,7 @@ export const useFetch = () => {
         setLoading(false);
         setError(null);
       } catch (error) {
-        console.log(error);
+        console.error("error use-fetch", error);
         setError(error.response.data || "Something went wrong");
         setLoading(false);
       }

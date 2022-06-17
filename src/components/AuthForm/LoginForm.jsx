@@ -20,7 +20,7 @@ const LoginForm = (props) => {
   return (
     <form
       onSubmit={submitHandler}
-      className="max-w-[30rem] w-full shadow-[0_10px_60px_1px_rgba(5,5,5,0.3)] my-8 p-4 rounded-lg bg-gradient-to-br from-[#e33e3e] to-[#644e4e]"
+      className="max-w-[30rem] w-full shadow-[0_10px_60px_1px_rgba(5,5,5,0.3)] my-8 p-4 rounded-lg bg-[#e33e3e]"
     >
       <Input
         inputConfig={{
