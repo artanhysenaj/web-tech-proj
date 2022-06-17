@@ -5,22 +5,20 @@ const Input = (props) => {
   return (
     <div className="my-4">
       <label
-        className="block text-[#fff5f5] text-[1rem] font-bold mb-1"
+        className="block text-[#fff5f5] text-[1rem] font-bold "
         htmlFor={inputConfig.id}
       >
         {label}
         {inputHasError && (
-          <span className="font-[400] text-[rgb(255, 238, 0)] transition-all ease-out">
+          <span className="font-[400] text-[#d2be4b] transition-all ease-out">
             {" "}
             {errorMessage ? errorMessage : "is invalid"}
           </span>
         )}
       </label>
       <input
-        className={`w-full py-2 px-3 rounded text-[#4a5568] border-none outline-none focus:border-b ${
-          inputHasError
-            ? "outline-[1.5px_solid_rgb(255,238,0)_!important]"
-            : null
+        className={`w-full py-2 px-3 transition-all text-[#f5f5f5] border-b-2 bg-transparent outline-none  ${
+          inputHasError ? "border-[#d2be4b]" : null
         }`}
         {...config}
       />

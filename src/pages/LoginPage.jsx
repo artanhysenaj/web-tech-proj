@@ -1,20 +1,47 @@
-import React from "react";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import { useFetch } from "./../hooks/use-fetch";
 import { login } from "../api/Authentication/Authentication";
-import AuthenticateForm from "../components/AuthForm/AuthForm";
+import LoginForm from "../components/AuthForm/LoginForm";
 import Logo from "../components/UI/Logo/Logo";
 import Wrapper from "../components/UI/Wrapper/Wrapper";
 import { authContext } from "../store/AuthContext/auth-context";
 const LoginPage = (props) => {
   const navigate = useNavigate();
   const context = useContext(authContext);
-  console.log(context);
+  const { authenticated } = context;
+  const { sendRequest: fetchLogin, loading, error } = useFetch();
+  let loaderRef = useRef();
+  useEffect(() => {
+    if (authenticated) {
+      navigate("/");
+    }
+  }, [navigate, authenticated]);
+  useEffect(() => {
+    if (loading) {
+      loaderRef.current = toast.loading("Logging in...", {
+        customId: "loader",
+      });
+    } else if (!loading && error) {
+      toast.update(loaderRef.current, {
+        render: error.message,
+        type: "error",
+        isLoading: loading,
+        autoClose: true,
+      });
+    } else {
+      toast.update(loaderRef.current, {
+        render: "Logged in successfully",
+        type: "success",
+        isLoading: loading,
+        autoClose: true,
+      });
+    }
+  }, [loading, error]);
 
   const loginHandler = async (data) => {
-    const response = await login(data.email, data.password);
-    context.login(response);
+    fetchLogin(login.bind(null, data.email, data.password), context.login);
   };
 
   return (
@@ -22,10 +49,13 @@ const LoginPage = (props) => {
       <div className="flex flex-col w-full justify-center items-center my-8">
         <div className="flex justify-center items-center">
           <Logo />
-          <h2 className="text-2xl font-bold inline mt-4 ml-4">Sign-In</h2>
+          <div className="ml-4">
+            <h2 className="text-2xl font-bold inline">Sign-In</h2>
+            <p>and interact with your snippets</p>
+          </div>
         </div>
-        <AuthenticateForm
-          isLoading={false}
+        <LoginForm
+          isLoading={loading}
           authMode="Login"
           authFunction={loginHandler}
         />

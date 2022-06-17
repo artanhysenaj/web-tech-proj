@@ -8,9 +8,11 @@ export const validateToken = async (username, password) => {
   );
   return response.data;
 };
+
 export const getUser = async (token) => {};
+
 export const login = async (username, password) => {
-  const response = await axios.post(
+  return await axios.post(
     url + "/wp-json/jwt-auth/v1/token",
     {
       username,
@@ -22,10 +24,24 @@ export const login = async (username, password) => {
       },
     }
   );
-  return response.data;
 };
-export const logout = async (token) => {};
-export const register = async (username, password) => {};
+
+export const register = async (
+  firstName,
+  lastName,
+  username,
+  email,
+  password
+) => {
+  return await axios.post(url + "/wp-json/wp/v2/users", {
+    first_name: firstName,
+    last_name: lastName,
+    username: username,
+    email: email,
+    password: password,
+  });
+};
+
 export const updateUser = async (token, username, password) => {};
 export const forgotPassword = async (token) => {};
 export const changePassword = async (token, oldPassword, newPassword) => {};

@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Spinner.module.css";
 const Spinner = (props) => {
   return (
-    <div className={classes["lds-ellipsis"]}>
+    <div className={`${classes["lds-ellipsis"]} ${props.className ?? ""}`}>
       <div></div>
       <div></div>
       <div></div>
