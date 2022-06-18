@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignIn, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import NavItem from "./NavItem";
 import Logo from "./../UI/Logo/Logo";
-import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { authContext } from "../../store/AuthContext/auth-context";
 const Navigation = (props) => {
@@ -160,12 +162,14 @@ const Navigation = (props) => {
             to="/login"
           >
             Sign-In
+            {/* <FontAwesomeIcon className="ml-2" icon={faSignIn} /> */}
           </Link>
           <Link
             className="bg-[#ffffff] px-3 py-1 rounded text-[#333] hover:bg-transparent border hover:text-white  transition-all duration-200"
             to="/register"
           >
             Sign-Up
+            {/* <FontAwesomeIcon className="ml-2" icon={faSignInAlt} /> */}
           </Link>
         </ul>
       )}

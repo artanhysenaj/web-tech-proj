@@ -10,3 +10,12 @@ export const localStorageHelper = {
     localStorage.removeItem(key);
   },
 };
+
+export const noDuplicates = (arr1, arr2) =>
+  arr2.filter((element) => {
+    let found = true;
+    for (let el of arr1) {
+      if (el.id === element.id) found = false;
+    }
+    return found;
+  });

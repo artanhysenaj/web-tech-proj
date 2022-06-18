@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useCallback } from "react";
+import { toast } from "react-toastify";
 export const useFetch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,9 +15,9 @@ export const useFetch = () => {
         setLoading(false);
         setError(null);
       } catch (error) {
-        console.error("error use-fetch", error);
         setError(error.response.data || "Something went wrong");
         setLoading(false);
+        toast.error(error.response.data.message || "Something went wrong");
       }
     },
     [setError, setLoading]
