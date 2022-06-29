@@ -11,13 +11,15 @@ export const useFetch = () => {
       setError(null);
       try {
         const response = await fetchFunction();
+        console.log("here", response);
         applyFunction && applyFunction(response.data);
         setLoading(false);
         setError(null);
       } catch (error) {
-        setError(error.response.data || "Something went wrong");
+        console.log(error);
+        setError(error?.response?.data || "Something went wrong");
         setLoading(false);
-        toast.error(error.response.data.message || "Something went wrong");
+        toast.error(error?.response?.data?.message || "Something went wrong");
       }
     },
     [setError, setLoading]

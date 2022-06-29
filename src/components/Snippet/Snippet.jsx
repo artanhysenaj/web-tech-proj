@@ -1,28 +1,21 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { useContext } from "react";
-import { getLanguage } from "../../api/Languages/Languages";
-import { useFetch } from "../../hooks/use-fetch";
 import { authContext } from "../../store/AuthContext/auth-context";
 import Code from "./Code";
+
 const Snippet = React.forwardRef((props, ref) => {
+  const { authenticated } = useContext(authContext);
   const [showCode, setShowCode] = useState(false);
-  const [language, setLanguage] = useState([]);
   const {
     id,
     title,
     content,
-    languages: languageId,
+    acf: { language },
     excerpt: description,
     x_author,
   } = props.snippet;
-  const date = new Date(props.snippet.date).toDateString();
-  const { authenticated } = useContext(authContext);
-  const { sendRequest, isLoading } = useFetch();
 
-  useEffect(() => {
-    sendRequest(getLanguage.bind(null, languageId.at(0)), setLanguage);
-  }, [sendRequest, languageId, setLanguage]);
+  const date = new Date(props.snippet.date).toDateString();
 
   const showCodeButton = (
     <button
@@ -33,7 +26,6 @@ const Snippet = React.forwardRef((props, ref) => {
     </button>
   );
 
-  // console.log(description);
   return (
     <li
       ref={ref}
@@ -44,7 +36,7 @@ const Snippet = React.forwardRef((props, ref) => {
           {title.rendered}
         </h2>
         <span className="font-bold text-[.6rem] sm:text-sm text-[#9b2c2c] py-1 px-2 rounded-lg ">
-          {!isLoading && language.name}
+          {language}
         </span>
       </div>
       <div
@@ -55,22 +47,26 @@ const Snippet = React.forwardRef((props, ref) => {
       <Code
         code={content?.rendered || "Hello World"}
         showCode={showCode}
-        language="javascript"
+        language={language}
         editable={authenticated}
       />
 
       <div className="mt-1 flex justify-between">
         <section>
-          <span className="cursor-pointer text-[#333] mr-2 font-semibold text-[0.75rem] sm:text-[0.9rem] hover:underline">
-            Edit
-          </span>
-          <span className="cursor-pointer text-[#e33e3e]  font-semibold text-[0.75rem] sm:text-[0.9rem] hover:underline">
-            Delete
-          </span>
+          {authenticated && (
+            <>
+              <span className="cursor-pointer text-[#333] mr-2 font-semibold text-[0.75rem] sm:text-[0.9rem] hover:underline">
+                Edit
+              </span>
+              <span className="cursor-pointer text-[#e33e3e]  font-semibold text-[0.75rem] sm:text-[0.9rem] hover:underline">
+                Delete
+              </span>
+            </>
+          )}
         </section>
         <section>
           <span className=" text-[#565656]  font-semibold text-[.6rem] sm:text-[0.75rem] capitalize">
-            {x_author}
+            {x_author || "Anonymous"}
           </span>
           <span className=" border-r border-[#565656] mx-1"></span>
           <span className=" text-[#565656]  font-semibold text-[.6rem] sm:text-[0.75rem] ">

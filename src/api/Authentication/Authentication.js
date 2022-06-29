@@ -43,5 +43,25 @@ export const register = async (
 };
 
 export const updateUser = async (token, username, password) => {};
-export const forgotPassword = async (token) => {};
 export const changePassword = async (token, oldPassword, newPassword) => {};
+
+export const forgotPassword = {
+  sendEmail: async (email) => {
+    return await axios.post(url + "/wp-json/bdpwr/v1/reset-password", {
+      email,
+    });
+  },
+  validateCode: async (email, code) => {
+    return await axios.post(url + "/wp-json/bdpwr/v1/validate-code", {
+      email: email,
+      code: code,
+    });
+  },
+  resetPassword: async (email, code, password) => {
+    return await axios.post(url + "/wp-json/bdpwr/v1/reset-password", {
+      email: email,
+      code: code,
+      password: password,
+    });
+  },
+};

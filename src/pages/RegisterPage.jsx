@@ -80,7 +80,7 @@ const RegisterPage = (props) => {
         <div>
           <span
             onClick={() => navigate("/login")}
-            className="text-white cursor-pointer"
+            className="text-[#37bdf8] cursor-pointer hover:underline"
           >
             Sign-in instead
           </span>

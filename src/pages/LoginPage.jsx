@@ -61,12 +61,15 @@ const LoginPage = (props) => {
         />
         <div>
           <p>
-            <span className="text-[#37bdf8] cursor-pointer">
+            <span
+              onClick={() => navigate("/forgot-password")}
+              className="text-[#37bdf8] cursor-pointer hover:underline"
+            >
               Forgot my password
             </span>{" "}
             <b>or</b>{" "}
             <span
-              className="text-[#37bdf8] cursor-pointer"
+              className="text-[#37bdf8] cursor-pointer hover:underline"
               onClick={() => navigate("/register")}
             >
               Don't have an account?
