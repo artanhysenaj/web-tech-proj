@@ -137,7 +137,7 @@ const Navigation = (props) => {
         <NavItem to="/" routeName="Home" />
         <NavItem to="/blog" routeName="Blog" />
         <NavItem to="/language" routeName="Language" />
-        <NavItem to="/page" routeName="About" />
+        <NavItem to="/about" routeName="About" />
       </ul>
 
       {/* seachbar somwhere around here */}
