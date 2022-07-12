@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { useContext } from "react";
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import { localStorageHelper } from "../../helpers/helperFunctions";
@@ -9,6 +10,8 @@ export const authContext = createContext({
   logout: () => {},
   user: null,
 });
+
+export const useAuthContext = () => useContext(authContext);
 
 const AuthContextProvider = (props) => {
   const [authenticated, setAuthenticated] = useState(false);

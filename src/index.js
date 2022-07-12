@@ -14,10 +14,10 @@ root.render(
       <AuthContextProvider>
         <ToastContainer
           position="top-right"
-          autoClose={4500}
+          autoClose={3500}
           hideProgressBar={false}
           newestOnTop={true}
-          closeOnClick
+          closeOnClick={true}
           rtl={false}
           pauseOnFocusLoss
           draggable={true}
