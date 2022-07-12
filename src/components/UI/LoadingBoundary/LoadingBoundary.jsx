@@ -1,10 +1,9 @@
 import React from "react";
 import Spinner from "../Spinner/Spinner";
 
-
-
 const LoadingBoundary = ({ loading, children }) => {
-  return <div>{loading ? <Spinner className="my-0 h-12" /> : children}</div>;
+  if (loading) return <Spinner className="my-0 h-12" />;
+  return <>{children}</>;
 };
 
 export default LoadingBoundary;

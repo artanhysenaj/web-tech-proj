@@ -1,18 +1,7 @@
-import { useCallback } from "react";
-import { useContext } from "react";
-import { createContext, useState } from "react";
+import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { localStorageHelper } from "../../helpers/helperFunctions";
-
-export const authContext = createContext({
-  authenticated: false,
-  login: () => {},
-  logout: () => {},
-  user: null,
-});
-
-export const useAuthContext = () => useContext(authContext);
-
+import { AuthContext } from "./AuthContext";
 const AuthContextProvider = (props) => {
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
@@ -35,11 +24,11 @@ const AuthContextProvider = (props) => {
   }, []);
 
   return (
-    <authContext.Provider
+    <AuthContext.Provider
       value={{ authenticated, login, logout, user, loginOnReload }}
     >
       {props.children}
-    </authContext.Provider>
+    </AuthContext.Provider>
   );
 };
 export default AuthContextProvider;

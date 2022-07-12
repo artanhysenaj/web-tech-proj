@@ -5,8 +5,9 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import NavMobile from "./NavComponents/NavMobile";
 import NavItem from "./NavComponents/NavItem";
 import Logo from "./../UI/Logo/Logo";
-import { useAuthContext } from "../../store/AuthContext/auth-context";
+import { useAuthContext } from "../../store/AuthContext/AuthContext";
 import { useCallback } from "react";
+import Button from "../UI/Button/Button";
 const Navigation = (props) => {
   const [showMobileNav, setShowMobileNav] = useState(false);
   const { authenticated, logout, user } = useAuthContext();
@@ -56,18 +57,12 @@ const Navigation = (props) => {
 
       {!authenticated && (
         <ul className="hidden md:flex gap-2">
-          <Link
-            className="px-3 py-1 rounded border hover:bg-white hover:text-[#333] transition-all duration-200"
-            to="/login"
-          >
-            Sign-In
-          </Link>
-          <Link
-            className="bg-[#ffffff] px-3 py-1 rounded text-[#333] hover:bg-transparent border hover:text-white  transition-all duration-200"
-            to="/register"
-          >
-            Sign-Up
-          </Link>
+          <Button variant="outline">
+            <Link to="/login">Sign-In</Link>
+          </Button>
+          <Button>
+            <Link to="/register">Sign-Up</Link>
+          </Button>
         </ul>
       )}
     </nav>

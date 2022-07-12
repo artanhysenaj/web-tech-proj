@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useContext } from "react";
-import { authContext } from "../../store/AuthContext/auth-context";
+import { useAuthContext } from "../../store/AuthContext/AuthContext";
 import Code from "./Code";
 
 const Snippet = React.forwardRef((props, ref) => {
-  const { authenticated } = useContext(authContext);
+  const { authenticated } = useAuthContext();
   const [showCode, setShowCode] = useState(false);
   const {
     id,
@@ -66,7 +65,7 @@ const Snippet = React.forwardRef((props, ref) => {
         </section>
         <section>
           <span className=" text-[#565656]  font-semibold text-[.6rem] sm:text-[0.75rem] capitalize">
-            {x_author || "Anonymous"}
+            {x_author ?? "Anonymous"}
           </span>
           <span className=" border-r border-[#565656] mx-1"></span>
           <span className=" text-[#565656]  font-semibold text-[.6rem] sm:text-[0.75rem] ">

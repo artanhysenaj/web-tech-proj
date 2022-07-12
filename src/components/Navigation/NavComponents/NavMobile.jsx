@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation } from "react-router-dom";
 import NavItem from "./NavItem";
-import { useAuthContext } from "../../../store/AuthContext/auth-context";
+import { useAuthContext } from "../../../store/AuthContext/AuthContext";
 import { useEffect } from "react";
+import Button from "../../UI/Button/Button";
 const NavMobile = ({ showMobileNav, closeNav }) => {
   const { authenticated, logout, user } = useAuthContext();
   const firstName = user?.user_display_name.split(" ").at(0);
@@ -21,7 +22,7 @@ const NavMobile = ({ showMobileNav, closeNav }) => {
         <div className="flex items-end ">
           {authenticated && (
             <img
-              onClick={logout}
+              onClick={() => {}}
               className="w-11 h-11 rounded-full"
               src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
               alt="user profile"
@@ -49,28 +50,29 @@ const NavMobile = ({ showMobileNav, closeNav }) => {
 
       {!authenticated && (
         <ul className="flex justify-center gap-2 w-full mt-16">
-          <Link className="px-2 py-1 text-sm rounded border" to="/login">
-            Sign-In
-          </Link>
-          <Link
-            className="bg-[#ffffff] px-3 py-1 rounded text-sm text-[#333] border"
-            to="/register"
-          >
-            Sign-Up
-          </Link>
+          <Button variant="outline">
+            <Link className=" text-sm" to="/login">
+              Sign-In
+            </Link>
+          </Button>
+          <Button>
+            <Link className="text-sm" to="/register">
+              Sign-Up
+            </Link>
+          </Button>
         </ul>
       )}
 
       {authenticated && (
-        <button
+        <Button
           onClick={() => {
             logout();
             closeNav();
           }}
-          className="px-2 py-1 text-sm rounded border mt-10"
-        >
-          Logout
-        </button>
+          variant="outline"
+          className="text-sm mt-10"
+          label="Logout"
+        />
       )}
     </div>
   );
