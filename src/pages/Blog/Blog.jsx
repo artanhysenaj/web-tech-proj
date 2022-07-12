@@ -9,7 +9,13 @@ const Blog = () => {
   const { data: post, error, isLoading } = useQuery(() => getBlog(blogId));
   console.log({ post });
 
-  return <div>Blog</div>;
+  return (
+    <div>
+      <div>
+        <h2>{post?.title?.rendered}</h2>
+      </div>
+    </div>
+  );
 };
 
 export default Blog;
