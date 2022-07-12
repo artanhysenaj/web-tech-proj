@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import App from "./App";
-import AuthContextProvider from "./store/AuthContext/auth-context";
+import AuthContextProvider from "./store/AuthContext/AuthContextProvider";
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -14,10 +14,10 @@ root.render(
       <AuthContextProvider>
         <ToastContainer
           position="top-right"
-          autoClose={4500}
+          autoClose={3500}
           hideProgressBar={false}
           newestOnTop={true}
-          closeOnClick
+          closeOnClick={true}
           rtl={false}
           pauseOnFocusLoss
           draggable={true}

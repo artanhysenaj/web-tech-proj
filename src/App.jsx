@@ -1,7 +1,6 @@
-import { useContext } from "react";
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { authContext } from "./store/AuthContext/auth-context";
+import { useAuthContext } from "./store/AuthContext/AuthContext";
 import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
 import BlogPage from "./pages/BlogPage";
@@ -12,7 +11,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 
 function App() {
-  const context = useContext(authContext);
+  const context = useAuthContext();
   const { loginOnReload } = context;
   //persist user on reload
   useEffect(() => {
@@ -21,7 +20,7 @@ function App() {
 
   return (
     <>
-      <div className="App max-w-[900px] mx-auto">
+      <div className="max-w-[900px] mx-auto">
         <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />

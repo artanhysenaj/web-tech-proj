@@ -16,17 +16,15 @@ const Backdrop = (props) => {
 
 const ModalOverlay = (props) => {
   return (
-    // <div className="fixed t-[30vh] l-[10%] w-[80%] z-50 overflow-hidden sm:l-[calc(50% - 20rem)] sm:w-[40rem]">
-    // <div className="fixed z-50 w-full h-full">
+    
     <div className="rounded p-4 fixed z-50 max-w-[20rem] sm:max-w-[40rem] mx-auto top-32 sm:top-[30vh] left-[calc(50%-10rem)] sm:left-[calc(50%-20rem)] bg-gradient-to-br from-[#e33e3e] to-[#614925]">
-      {/* <div className="w-full flex justify-end "> */}
+      
       <FontAwesomeIcon
         onClick={props.onClose}
         className="absolute right-3 top-2 hover:cursor-pointer hover:text-[#333] transition-colors duration-200"
         icon={faXmark}
         size="2x"
       />
-      {/* </div> */}
       <header className="border-b w-[80%] mx-auto mb-1 sm:mb-4">
         <h2 className="mb-2 text-white text-xl sm:text-3xl font-bold capitalize text-center">
           {props.title}

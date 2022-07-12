@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFetch } from "./../hooks/use-fetch";
@@ -6,39 +6,18 @@ import { login } from "../api/Authentication/Authentication";
 import LoginForm from "../components/AuthForm/LoginForm";
 import Logo from "../components/UI/Logo/Logo";
 import Wrapper from "../components/UI/Wrapper/Wrapper";
-import { authContext } from "../store/AuthContext/auth-context";
+import { useAuthContext } from "../store/AuthContext/AuthContext";
 const LoginPage = (props) => {
   const navigate = useNavigate();
-  const context = useContext(authContext);
+  const context = useAuthContext();
   const { authenticated } = context;
   const { sendRequest: fetchLogin, loading, error } = useFetch();
-  let loaderRef = useRef();
+
   useEffect(() => {
-    if (authenticated) {
-      navigate("/");
-    }
-  }, [navigate, authenticated]);
-  useEffect(() => {
-    if (loading) {
-      loaderRef.current = toast.loading("Logging in...", {
-        customId: "loader",
-      });
-    } else if (!loading && error) {
-      toast.update(loaderRef.current, {
-        render: error.message || "Something went wrong",
-        type: "error",
-        isLoading: loading,
-        autoClose: true,
-      });
-    } else {
-      toast.update(loaderRef.current, {
-        render: "Logged in successfully",
-        type: "success",
-        isLoading: loading,
-        autoClose: true,
-      });
-    }
-  }, [loading, error]);
+    if (authenticated) toast.success("Login Successful");
+    if (error) toast.error(error.code || "Something went wrong");
+    if (authenticated && !loading) navigate("/");
+  }, [navigate, authenticated, loading, error]);
 
   const loginHandler = async (data) => {
     fetchLogin(login.bind(null, data.email, data.password), context.login);

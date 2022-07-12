@@ -1,17 +1,16 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { toast } from "react-toastify";
 import { useFetch } from "./../hooks/use-fetch";
 import { register } from "../api/Authentication/Authentication";
 import Logo from "../components/UI/Logo/Logo";
 import RegisterForm from "../components/AuthForm/RegisterForm";
 import Wrapper from "../components/UI/Wrapper/Wrapper";
-import { authContext } from "../store/AuthContext/auth-context";
+import { useAuthContext } from "../store/AuthContext/AuthContext";
 import { useEffect } from "react";
 const RegisterPage = (props) => {
   const navigate = useNavigate();
-  const context = useContext(authContext);
+  const context = useAuthContext();
   const { authenticated } = context;
   const {
     sendRequest: fetchRegister,
