@@ -3,12 +3,14 @@ import { Route, Routes } from "react-router-dom";
 import { useAuthContext } from "./store/AuthContext/AuthContext";
 import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
-import BlogPage from "./pages/BlogPage";
+
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import BlogPage from "./pages/Blog/Blogs";
+import Blog from "./pages/Blog/Blog";
 
 function App() {
   const context = useAuthContext();
@@ -25,6 +27,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:blogId" element={<Blog />} />
             <Route path="/languages" element={<h1>languages</h1>} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/login" element={<LoginPage />} />
