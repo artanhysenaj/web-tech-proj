@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import App from "./App";
 import AuthContextProvider from "./store/AuthContext/AuthContextProvider";
 import "./index.css";
+import SnippetsContextProvider from "./store/SnippetsContext/SnippetsContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -23,7 +24,9 @@ root.render(
           draggable={true}
           pauseOnHover={true}
         />
-        <App />
+        <SnippetsContextProvider>
+          <App />
+        </SnippetsContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>

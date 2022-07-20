@@ -13,8 +13,7 @@ import BlogPage from "./pages/Blog/Blogs";
 import Blog from "./pages/Blog/Blog";
 
 function App() {
-  const context = useAuthContext();
-  const { loginOnReload } = context;
+  const { loginOnReload } = useAuthContext();
   //persist user on reload
   useEffect(() => {
     loginOnReload();
