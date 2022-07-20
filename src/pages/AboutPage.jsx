@@ -1,13 +1,19 @@
 import React from 'react'
+import Logo from "../components/UI/Logo/Logo";
 
 const AboutPage = (props)=>{
-return(
-<>
   
-  <h1 className="text-center text-5xl mt-[200px] mb-[75px] font-bold text-white">
+return(
+<>  
+  {/* <h1 className="text-center text-5xl mt-[200px] mb-[75px] font-bold text-white">
     About Us
-  </h1>
-
+  </h1> */}
+  <div className="flex justify-center items-center">
+          <Logo />
+          <div className="ml-4">
+            <h2 className="text-6xl font-bold text-white in-line">About Us</h2>
+          </div>
+    </div>
   <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 space-around gap-9 mt-[80px] mb-[180px]">
     <div>
       <h1 className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left">
@@ -40,12 +46,18 @@ return(
 
   <div>
   <section className="text-gray-700 body-font relative">
-    <div className="container px-5 py-24 mx-auto">
+    <div className="container px-5 py-24 mx-auto p-2 sm:p-4 shadow-[0_10px_60px_1px_rgba(0,0,0,0.3)]  sm:mx-0 bg-gradient-to-br from-[#e33e3e] to-[#614925] mb-20 rounded-sm">
+    <div className="flex justify-center items-center">
+          <Logo />
+          <div className="ml-4">
+            <h2 className="text-4xl font-bold text-white in-line">Contact Us</h2>
+          </div>
+    </div>
       <div className="flex flex-col text-center w-full mb-12">
-        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">
+        {/* <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">
           Contact Us
-        </h1>
-        <p className="lg:w-2/3 mx-auto leading-relaxed text-white">
+        </h1> */}
+        <p className="lg:w-2/3 mx-auto mt-5 leading-relaxed text-white">
           For all enquiries, please email us using the form below
         </p>
       </div>
@@ -53,14 +65,14 @@ return(
         <div className="flex flex-wrap -m-2">
           <div className="p-2 w-1/2">
             <div className="relative">
-              <label htmlFor="name" className="leading-7 text-sm text-white">
+              <label htmlFor="name" className="leading-7 text-sm text-white font-bold">
                 Name
               </label>
               <input
                 type="text"
                 id="name"
                 name="name"
-                className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500  outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full py-2 px-3 transition-all text-[#f5f5f5] border-b-2 bg-transparent outline-none  null"
               />
             </div>
           </div>
@@ -68,7 +80,7 @@ return(
             <div className="relative">
               <label
                 htmlFor="email"
-                className="leading-7 text-sm text-white"
+                className="leading-7 text-sm text-white font-bold"
               >
                 Email
               </label>
@@ -76,7 +88,7 @@ return(
                 type="email"
                 id="email"
                 name="email"
-                className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full py-2 px-3 transition-all text-[#f5f5f5] border-b-2 bg-transparent outline-none  null"
               />
             </div>
           </div>
@@ -84,14 +96,14 @@ return(
             <div className="relative">
               <label
                 htmlFor="message"
-                className="leading-7 text-sm text-white"
+                className="leading-7 text-sm text-white font-bold"
               >
                 Message
               </label>
               <textarea
                 id="message"
                 name="message"
-                className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                className="w-full bg-transparent text-white rounded border border-gray-300 focus:border-indigo-500 h-32 text-base outline-none  py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
               ></textarea>
             </div>
           </div>
