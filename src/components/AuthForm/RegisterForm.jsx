@@ -1,187 +1,161 @@
-import React, { useState } from "react";
+import React from "react";
+import { Form, Formik } from "formik";
 import Input from "../UI/Input/Input";
 
-const isEmpty = (value) => value.trim().length === 0;
+const validateValues = (values) => {
+  const isEmpty = (value) => value.trim().length === 0;
+  const errors = {};
 
-const RegisterForm = (props) => {
-  const [email, setEmail] = useState({
-    value: "",
-    hasError: false,
-  });
-  const [userName, setUserName] = useState({
-    value: "",
-    hasError: false,
-  });
-  const [password, setPassword] = useState({
-    value: "",
-    hasError: false,
-  });
-  const [confirmPassword, setConfirmPassword] = useState({
-    value: "",
-    hasError: false,
-  });
-  const [firstName, setFirstName] = useState({
-    value: "",
-    hasError: false,
-  });
-  const [lastName, setLastName] = useState({
-    value: "",
-    hasError: false,
-  });
+  for (let key in values) {
+    if (isEmpty(values[key])) errors[key] = "is empty";
+  }
 
-  const [formIsValid, setFormIsValid] = useState(false);
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
-  const submitHandler = (event) => {
-    event.preventDefault();
-    setPasswordsMatch(password.value === confirmPassword.value);
-    setFormIsValid(
-      !isEmpty(firstName.value) &&
-        !isEmpty(lastName.value) &&
-        !isEmpty(email.value) &&
-        !isEmpty(userName.value) &&
-        !isEmpty(password.value) &&
-        !isEmpty(confirmPassword.value) &&
-        passwordsMatch
-    );
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email))
+    errors.email = "Invalid email address";
 
-    if (!formIsValid) return;
-    props.authFunction({
-      email: email.value,
-      userName: userName.value,
-      password: password.value,
-      firstName: firstName.value,
-      lastName: lastName.value,
-    });
+  if (values.password !== values.confirmPassword)
+    errors.confirmPassword = "Passwords do not match";
+
+  return errors;
+};
+
+const RegisterForm = ({ isLoading, onRegister }) => {
+  const submitHandler = (values, { setSubmitting }) => {
+    setSubmitting(false);
+    onRegister(values);
   };
 
   return (
-    <form
-      onSubmit={submitHandler}
-      className="max-w-[30rem] w-full shadow-[0_10px_60px_1px_rgba(5,5,5,0.3)] my-8 p-4 rounded-lg bg-[#e33e3e]"
-    >
-      <div className="flex justify-between">
-        <Input
-          inputConfig={{
-            label: "First Name",
-            type: "test",
-            id: "firstName",
-            name: "firstName",
-            placeholder: "John",
-            required: true,
-            //   inputHasError: password.hasError,
-            value: firstName.value,
-            onChange: (event) =>
-              setFirstName((prevState) => ({
-                ...prevState,
-                value: event.target.value,
-              })),
-            //   onBlur: password.onBlurHandler,
-          }}
-        />
-        <Input
-          inputConfig={{
-            label: "Last Name",
-            type: "test",
-            id: "lastName",
-            name: "lastName",
-            placeholder: "Doe",
-            required: true,
-            //   inputHasError: password.hasError,
-            value: lastName.value,
-            onChange: (event) =>
-              setLastName((prevState) => ({
-                ...prevState,
-                value: event.target.value,
-              })),
-            //   onBlur: password.onBlurHandler,
-          }}
-        />
-      </div>
-      <Input
-        inputConfig={{
-          label: "Email",
-          type: "text",
-          id: "email",
-          name: "email",
-          placeholder: "example@gmail.com",
-          required: true,
-          //   inputHasError: email.hasError,
-          value: email.value,
-          onChange: (event) =>
-            setEmail((prevState) => ({
-              ...prevState,
-              value: event.target.value,
-            })),
-          //   onBlur: email.onBlurHandler,
+    <div className="max-w-[30rem] w-full shadow-[0_10px_60px_1px_rgba(5,5,5,0.3)] my-8 p-4 rounded-lg bg-[#e33e3e]">
+      <Formik
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          email: "",
+          username: "",
+          password: "",
+          confirmPassword: "",
         }}
-      />
-      <Input
-        inputConfig={{
-          label: "Username",
-          type: "text",
-          id: "username",
-          name: "username",
-          placeholder: "user-name",
-          required: true,
-          //   inputHasError: email.hasError,
-          value: userName.value,
-          onChange: (event) =>
-            setUserName((prevState) => ({
-              ...prevState,
-              value: event.target.value,
-            })),
-          //   onBlur: email.onBlurHandler,
-        }}
-      />
+        validate={validateValues}
+        onSubmit={submitHandler}
+      >
+        {({
+          values,
+          handleBlur,
+          errors,
+          touched,
+          handleChange,
+          isSubmitting,
+        }) => (
+          <Form>
+            <div className="flex justify-between">
+              <Input
+                inputConfig={{
+                  label: "First Name",
+                  type: "text",
+                  id: "firstName",
+                  name: "firstName",
+                  placeholder: "John",
+                  required: true,
+                  inputHasError: errors.firstName && touched.firstName,
+                  errorMessage: errors.firstName,
+                  value: values.firstName,
+                  onChange: handleChange,
+                  onBlur: handleBlur,
+                }}
+              />
+              <Input
+                inputConfig={{
+                  label: "Last Name",
+                  type: "text",
+                  id: "lastName",
+                  name: "lastName",
+                  placeholder: "Doe",
+                  required: true,
+                  inputHasError: errors.lastName && touched.lastName,
+                  errorMessage: errors.lastName,
+                  value: values.lastName,
+                  onChange: handleChange,
+                  onBlur: handleBlur,
+                }}
+              />
+            </div>
+            <Input
+              inputConfig={{
+                label: "Email",
+                type: "text",
+                id: "email",
+                name: "email",
+                placeholder: "example@gmail.com",
+                required: true,
+                inputHasError: errors.email && touched.email,
+                errorMessage: errors.email,
+                value: values.email,
+                onChange: handleChange,
+                onBlur: handleBlur,
+              }}
+            />
+            <Input
+              inputConfig={{
+                label: "Username",
+                type: "text",
+                id: "username",
+                name: "username",
+                placeholder: "user-name",
+                required: true,
+                inputHasError: errors.username && touched.username,
+                errorMessage: errors.username,
+                value: values.username,
+                onChange: handleChange,
+                onBlur: handleBlur,
+              }}
+            />
 
-      <Input
-        inputConfig={{
-          label: "Password",
-          type: "password",
-          id: "password",
-          name: "password",
-          placeholder: "********",
-          required: true,
-          //   inputHasError: password.hasError,
-          value: password.value,
-          onChange: (event) =>
-            setPassword((prevState) => ({
-              ...prevState,
-              value: event.target.value,
-            })),
-          //   onBlur: password.onBlurHandler,
-        }}
-      />
-      <Input
-        inputConfig={{
-          label: "Confirm Password",
-          type: "password",
-          id: "confirmPassword",
-          name: "confirmPassword",
-          placeholder: "********",
-          required: true,
-          inputHasError: !passwordsMatch,
-          errorMessage: "Passwords do not match",
-          value: confirmPassword.value,
-          onChange: (event) => {
-            setConfirmPassword((prevState) => ({
-              ...prevState,
-              value: event.target.value,
-            }));
-          },
-          onBlur: () => setPasswordsMatch(true),
-        }}
-      />
+            <Input
+              inputConfig={{
+                label: "Password",
+                type: "password",
+                id: "password",
+                name: "password",
+                placeholder: "********",
+                required: true,
+                inputHasError: errors.password && touched.password,
+                errorMessage: errors.password,
+                value: values.password,
+                onChange: handleChange,
+                onBlur: handleBlur,
+              }}
+            />
+            <Input
+              inputConfig={{
+                label: "Confirm Password",
+                type: "password",
+                id: "confirmPassword",
+                name: "confirmPassword",
+                placeholder: "********",
+                required: true,
+                inputHasError:
+                  errors.confirmPassword && touched.confirmPassword,
+                errorMessage: errors.confirmPassword,
+                value: values.confirmPassword,
+                onChange: handleChange,
+                onBlur: handleBlur,
+              }}
+            />
 
-      <div className="flex flex-col justify-center items-center">
-        <button
-          type="submit"
-          className="w-1/2 py-2 px-3 rounded text-white bg-[#3c5c9c] text-[1rem] font-[500] border-none outline-none"
-        >
-          {props.isLoading ? "Loading..." : props.authMode}
-        </button>
-      </div>
-    </form>
+            <div className="flex flex-col justify-center items-center">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-1/2 h-10 py-2 px-3 rounded text-white bg-[#375288] text-[1rem] font-[500] border-none outline-none"
+              >
+                {isLoading ? "Loading..." : "Register"}
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
 

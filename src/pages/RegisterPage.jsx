@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFetch } from "./../hooks/use-fetch";
@@ -10,52 +9,21 @@ import { useAuthContext } from "../store/AuthContext/AuthContext";
 import { useEffect } from "react";
 const RegisterPage = (props) => {
   const navigate = useNavigate();
-  const context = useAuthContext();
-  const { authenticated } = context;
-  const {
-    sendRequest: fetchRegister,
-    loading,
-    error,
-  } = useFetch({ toasts: true });
-  let loaderRef = useRef();
+  const { authenticated } = useAuthContext();
+  const { sendRequest: fetchRegister, loading } = useFetch({ toasts: true });
 
   useEffect(() => {
-    if (authenticated) {
-      navigate("/");
-    }
+    if (authenticated) navigate("/");
   }, [navigate, authenticated]);
-  useEffect(() => {
-    if (loading) {
-      loaderRef.current = toast.loading("Signing Up...", {
-        customId: "loader",
-      });
-    } else if (!loading && error) {
-      toast.update(loaderRef.current, {
-        render: error.message || "Something went wrong",
-        type: "error",
-        isLoading: loading,
-        autoClose: true,
-      });
-    } else {
-      toast.update(loaderRef.current, {
-        render: "Try logging in now",
-        type: "info",
-        isLoading: loading,
-        autoClose: true,
-      });
-    }
-  }, [loading, error]);
 
   const registerHandler = async (data) => {
+    const { firstName, lastName, username, email, password } = data;
     fetchRegister(
-      register.bind(
-        null,
-        data.firstName,
-        data.lastName,
-        data.userName,
-        data.email,
-        data.password
-      )
+      register.bind(null, firstName, lastName, username, email, password),
+      () => {
+        toast.success("Registered successfully. Try logging in now");
+        navigate("/login");
+      }
     );
   };
 
@@ -71,11 +39,7 @@ const RegisterPage = (props) => {
             </p>
           </div>
         </div>
-        <RegisterForm
-          isLoading={loading}
-          authMode="Register"
-          authFunction={registerHandler}
-        />
+        <RegisterForm isLoading={loading} onRegister={registerHandler} />
         <div>
           <span
             onClick={() => navigate("/login")}
