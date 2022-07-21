@@ -11,7 +11,7 @@ const Input = (props) => {
         {label}
         {inputHasError && (
           <span className="font-[400] text-[#d2be4b] transition-all ease-out">
-            {" "}
+            <span className="text-white">: </span>
             {errorMessage ? errorMessage : "is invalid"}
           </span>
         )}

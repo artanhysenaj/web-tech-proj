@@ -35,7 +35,6 @@ const LoginPage = (props) => {
         </div>
         <LoginForm
           isLoading={loading}
-          authMode="Login"
           authFunction={loginHandler}
         />
         <div>

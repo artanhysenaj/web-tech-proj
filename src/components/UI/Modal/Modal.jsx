@@ -3,12 +3,11 @@ import ReactDOM from "react-dom";
 const Backdrop = ({ onClose }) => {
   return (
     <div
-      className="fixed top-0 left-0 w-full h-[2000px] z-[99] bg-[rgba(0,0,0,0.75)] "
+      className="fixed top-0 left-0 w-full h-[2000px] z-[99] bg-[rgba(0,0,0,0.5)] "
       onClick={onClose}
     />
   );
 };
-
 
 const Modal = ({ onClose, children, className }) => {
   return (

@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { localStorageHelper } from "../../helpers/helperFunctions";
 import { AuthContext } from "./AuthContext";
+import axios from "axios";
 const AuthContextProvider = (props) => {
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
@@ -10,6 +11,7 @@ const AuthContextProvider = (props) => {
     localStorageHelper.set("user", user);
     setUser(user);
     setAuthenticated(true);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
   };
 
   const logout = () => {

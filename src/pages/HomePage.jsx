@@ -1,15 +1,15 @@
 import React, { useState, useRef, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import Banner from "../components/Banner/Banner";
 import Snippet from "../components/Snippet/Snippet";
 import Wrapper from "../components/UI/Wrapper/Wrapper";
 import DataBoundary from "../components/UI/DataBoundary/DataBoundary";
 import useInfiniteScroll from "../hooks/use-infinite-scroll";
+import { useSnippetsContext } from "../store/SnippetsContext/SnippetsContext";
 
 const HomePage = (props) => {
-  
+  const { snippets } = useSnippetsContext();
   const [offset, setOffset] = useState(0);
-  const { snippets, loading, error, hasMore } = useInfiniteScroll({
+  const { loading, error, hasMore } = useInfiniteScroll({
     query: "snippets",
     perPage: 6,
     offset,
