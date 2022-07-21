@@ -27,26 +27,26 @@ const Banner = (props) => {
   );
   return (
     <header className="my-8 mx-2 sm:block flex flex-col items-center">
-      <div className="flex justify-between ">
+      <div className="flex justify-between flex-col md:flex-row ">
         <div>
           <h1 className="text-[#fff5f5] sm:text-[1.5rem]">Errday Snippets</h1>
           <p className="text-[#fed7d7] sm:text-base text-xs mb-2">
             Create or Browse snippets you use or see everyday
           </p>
+          {!authenticated && (
+            <Button
+              onClick={() => navigate("/login")}
+              label="login"
+              variant="outline"
+            >
+              <FontAwesomeIcon className="ml-2" icon={faSignInAlt} />
+            </Button>
+          )}
         </div>
-        <div className="self-end mb-2 mr-2 w-1/3 ">
+        <div className="self-end mb-2 md:mr-2 w-full md:w-1/3 ">
           <Search onSearch={handleSearch} loading={loading} />
         </div>
       </div>
-      {!authenticated && (
-        <Button
-          onClick={() => navigate("/login")}
-          label="login"
-          variant="outline"
-        >
-          <FontAwesomeIcon className="ml-2" icon={faSignInAlt} />
-        </Button>
-      )}
     </header>
   );
 };

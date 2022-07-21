@@ -4,13 +4,15 @@ import { deleteSnippet } from "../../api/Snippets/Snippets";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAuthContext } from "../../store/AuthContext/AuthContext";
 import { useSnippetsContext } from "../../store/SnippetsContext/SnippetsContext";
-import DeleteConfirmationDialog from "../shared/DeleteConfirmationDialog/DeleteConfirmationDialog";
-import Code from "./Code";
+import DeleteConfirmationDialog from "./SnippetComponents/DeleteConfirmationDialog";
+import Code from "./SnippetComponents/Code";
+import SnippetModal from "./SnippetComponents/SnippetModal";
 
 const Snippet = React.forwardRef((props, ref) => {
   const { authenticated } = useAuthContext();
   const { deleteSnippet: deleteSnippetFromStore } = useSnippetsContext();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [showCode, setShowCode] = useState(false);
   const {
     id,
@@ -24,7 +26,7 @@ const Snippet = React.forwardRef((props, ref) => {
   } = props.snippet;
   const date = new Date(props.snippet.date).toDateString();
 
-  const { sendRequest, loading } = useFetch();
+  const { sendRequest, loading: loadingDelete } = useFetch();
 
   const handleDelete = async () => {
     sendRequest(
@@ -36,6 +38,7 @@ const Snippet = React.forwardRef((props, ref) => {
       }
     );
   };
+  const handleEdit = () => {};
   const showCodeButton = (
     <button
       className="bg-[#9b2c2c] text-white text-sm sm:font-bold sm:py-1 py-[.1rem] mb-1 px-1 sm:px-2 rounded-[0.25rem] border-none "
@@ -52,7 +55,14 @@ const Snippet = React.forwardRef((props, ref) => {
         showDialog={isDeleteDialogOpen}
         onClose={() => setIsDeleteDialogOpen(false)}
         onDelete={handleDelete}
-        loading={loading}
+        loading={loadingDelete}
+      />
+      <SnippetModal
+        show={isEditing}
+        snippet={props.snippet}
+        onClose={() => setIsEditing(false)}
+        onEdit={handleEdit}
+        loading={false}
       />
       <li
         ref={ref}
@@ -82,7 +92,10 @@ const Snippet = React.forwardRef((props, ref) => {
           <section>
             {authenticated && (
               <>
-                <span className="cursor-pointer text-[#333] mr-2 font-semibold text-[0.75rem] sm:text-[0.9rem] hover:underline">
+                <span
+                  className="cursor-pointer text-[#333] mr-2 font-semibold text-[0.75rem] sm:text-[0.9rem] hover:underline"
+                  onClick={() => setIsEditing(true)}
+                >
                   Edit
                 </span>
                 <span

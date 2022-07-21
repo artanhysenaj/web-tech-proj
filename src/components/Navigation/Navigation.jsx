@@ -40,8 +40,6 @@ const Navigation = (props) => {
         <NavItem to="/about" routeName="About" />
       </ul>
 
-      {/* seachbar somwhere around here */}
-
       {authenticated && (
         <div className="hidden md:flex flex-row-reverse items-center">
           <img

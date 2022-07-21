@@ -26,7 +26,7 @@ const Search = ({ onSearch, loading }) => {
       setShowFullInput(true);
       return;
     }
-    onSearch(searchValue);
+    if (searchValue.trim().length !== 0) onSearch(searchValue);
   };
 
   const handleOnBlur = () => {
@@ -35,10 +35,18 @@ const Search = ({ onSearch, loading }) => {
   };
 
   return (
-    <div className="relative ">
+    <div
+      className={`relative z-10 mt-2 ${
+        showFullInput ? "w-full" : "w-10"
+      } transition-all duration-200 ease-in-out md:w-full`}
+    >
       <input
         className={`
-        ${showFullInput ? "w-full pb-0 p-2" : "w-0 pb-2"}
+        ${
+          showFullInput
+            ? "w-full pb-0 p-2"
+            : "w-0 pb-2 md:translate-x-[17.5rem]"
+        }
         bg-transparent border-b-2 focus:outline-none autofill:bg-transparent transition-all duration-200 ease-in-out
         placeholder-gray-300`}
         type="text"
@@ -57,7 +65,7 @@ const Search = ({ onSearch, loading }) => {
       >
         <FontAwesomeIcon
           icon={faSearch}
-          className={`text-2xl ${
+          className={`md:text-2xl text-xl ${
             loading ? "animate-spin" : ""
           } m-auto hover:cursor-pointer hover:scale-110 transition-all duration-200 ease-in-out`}
         />
