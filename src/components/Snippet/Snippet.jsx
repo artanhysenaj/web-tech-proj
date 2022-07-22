@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { deleteSnippet } from "../../api/Snippets/Snippets";
+import { deleteSnippet, editSnippet } from "../../api/Snippets/Snippets";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAuthContext } from "../../store/AuthContext/AuthContext";
 import { useSnippetsContext } from "../../store/SnippetsContext/SnippetsContext";
@@ -10,7 +10,8 @@ import SnippetModal from "./SnippetComponents/SnippetModal";
 
 const Snippet = React.forwardRef((props, ref) => {
   const { authenticated } = useAuthContext();
-  const { deleteSnippet: deleteSnippetFromStore } = useSnippetsContext();
+  const { deleteSnippet: deleteSnippetFromStore, updateSnippet } =
+    useSnippetsContext();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [showCode, setShowCode] = useState(false);
@@ -26,7 +27,7 @@ const Snippet = React.forwardRef((props, ref) => {
   } = props.snippet;
   const date = new Date(props.snippet.date).toDateString();
 
-  const { sendRequest, loading: loadingDelete } = useFetch();
+  const { sendRequest, loading } = useFetch();
 
   const handleDelete = async () => {
     sendRequest(
@@ -38,7 +39,16 @@ const Snippet = React.forwardRef((props, ref) => {
       }
     );
   };
-  const handleEdit = () => {};
+  const handleEdit = (newSnippet) => {
+    sendRequest(
+      () => editSnippet(id, newSnippet),
+      () => {
+        updateSnippet(id, newSnippet);
+        setIsEditing(false);
+        toast.success(`${title.rendered} updated successfully!`);
+      }
+    );
+  };
   const showCodeButton = (
     <button
       className="bg-[#9b2c2c] text-white text-sm sm:font-bold sm:py-1 py-[.1rem] mb-1 px-1 sm:px-2 rounded-[0.25rem] border-none "
@@ -55,14 +65,14 @@ const Snippet = React.forwardRef((props, ref) => {
         showDialog={isDeleteDialogOpen}
         onClose={() => setIsDeleteDialogOpen(false)}
         onDelete={handleDelete}
-        loading={loadingDelete}
+        loading={loading}
       />
       <SnippetModal
         show={isEditing}
         snippet={props.snippet}
         onClose={() => setIsEditing(false)}
-        onEdit={handleEdit}
-        loading={false}
+        onSubmit={handleEdit}
+        loading={loading}
       />
       <li
         ref={ref}
@@ -82,7 +92,7 @@ const Snippet = React.forwardRef((props, ref) => {
         ></div>
         {showCodeButton}
         <Code
-          code={content?.rendered ?? "Hello World"}
+          content={content?.rendered ?? "Hello World"}
           showCode={showCode}
           language={language}
           editable={authenticated}

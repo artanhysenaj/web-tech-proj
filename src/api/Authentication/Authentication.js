@@ -9,7 +9,9 @@ export const validateToken = async (username, password) => {
   return response.data;
 };
 
-export const getUser = async (token) => {};
+export const getUserMe = async () => {
+  return await axios.get(url + "/wp-json/wp/v2/users/me");
+};
 
 export const login = async (username, password) => {
   return await axios.post(

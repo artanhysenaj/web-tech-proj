@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useFetch } from "./../hooks/use-fetch";
-import { register } from "../api/Authentication/Authentication";
-import Logo from "../components/UI/Logo/Logo";
-import RegisterForm from "../components/AuthForm/RegisterForm";
-import Wrapper from "../components/UI/Wrapper/Wrapper";
-import { useAuthContext } from "../store/AuthContext/AuthContext";
+import { useFetch } from "../../hooks/use-fetch";
+import { register } from "../../api/Authentication/Authentication";
+import Logo from "../../components/UI/Logo/Logo";
+import RegisterForm from "../../components/AuthForm/RegisterForm";
+import Wrapper from "../../components/UI/Wrapper/Wrapper";
+import { useAuthContext } from "../../store/AuthContext/AuthContext";
 import { useEffect } from "react";
 const RegisterPage = (props) => {
   const navigate = useNavigate();

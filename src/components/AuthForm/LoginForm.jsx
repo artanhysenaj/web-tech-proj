@@ -42,7 +42,7 @@ const LoginForm = (props) => {
           <Form>
             <Input
               inputConfig={{
-                label: "Email or username",
+                label: "Email",
                 type: "text",
                 id: "email",
                 name: "email",

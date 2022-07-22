@@ -1,43 +1,173 @@
 import React from "react";
-const SnippetForm = (props) => {
+import CodeEditor from "@uiw/react-textarea-code-editor";
+import { Formik, Form } from "formik";
+import Field from "./Field";
+import Button from "../../UI/Button/Button";
+import Spinner from "../../shared/Spinner/Spinner";
+
+const languages = [
+  "text",
+  "JavaScript",
+  "TypeScript",
+  "Java",
+  "JavaScript React",
+  "TypeScript React",
+  "Vue",
+  "Angular",
+  "Go",
+  "C++",
+  "C#",
+  "Rust",
+  "Ruby",
+  "CSS",
+  "HTML",
+  "JSON",
+];
+
+const validateValues = (values) => {
+  const isEmpty = (value) => value.trim().length === 0;
+  const errors = {};
+  for (let key in values) if (isEmpty(values[key])) errors[key] = "is empty";
+  return errors;
+};
+
+const SnippetForm = ({ onClose, loading, onSubmit, snippet }) => {
+  const submitHandler = (values, { setSubmitting }) => {
+    const newSnippet = {
+      title: values.title,
+      content: values.content,
+      fields: {
+        author: snippet?.acf.author ?? snippet?.author,
+        language: values.language,
+      },
+      excerpt: values.description,
+    };
+    setSubmitting(false);
+    onSubmit(newSnippet);
+  };
   return (
-    <form>
-      <div className="flex flex-col text-black">
-        <label htmlFor="title">Title</label>
-        <input type="text" id="title" name="title" />
-        <label htmlFor="content">Content</label>
-        <textarea id="content" name="content"></textarea>
-        <label htmlFor="language">Language</label>
-        <select id="language" name="language">
-          <option value="javascript">javascript</option>
-          <option value="python">python</option>
-          <option value="java">java</option>
-          <option value="c++">c++</option>
-          <option value="c#">c#</option>
-          <option value="php">php</option>
-          <option value="html">html</option>
-          <option value="css">css</option>
-          <option value="sass">sass</option>
-          <option value="less">less</option>
-          <option value="ruby">ruby</option>
-          <option value="rust">rust</option>
-          <option value="typescript">typescript</option>
-          <option value="swift">swift</option>
-          <option value="kotlin">kotlin</option>
-          <option value="go">go</option>
-          <option value="scala">scala</option>
-          <option value="elixir">elixir</option>
-          <option value="haskell">haskell</option>
-        </select>
-        <label htmlFor="description">Description</label>
-        <textarea id="description" name="description"></textarea>
-        <label htmlFor="author">Author</label>
-        <input type="text" id="author" name="author" />
-        <label htmlFor="date">Date</label>
-        <input type="date" id="date" name="date" />
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <div className="w-full p-4 text-white">
+      <Formik
+        initialValues={{
+          title: snippet?.title.rendered ?? "",
+          language: snippet?.acf.language ?? "text",
+          description: snippet?.excerpt.rendered ?? "",
+          content: snippet?.content.rendered ?? "",
+        }}
+        validate={validateValues}
+        onSubmit={submitHandler}
+      >
+        {({
+          values,
+          handleBlur,
+          errors,
+          touched,
+          handleChange,
+          isSubmitting,
+        }) => (
+          <Form className="">
+            <div className="md:flex gap-4">
+              <Field label="title">
+                <input
+                  className={`${
+                    errors.title && touched.title ? "!border-yellow-400" : ""
+                  } w-full p-2 bg-gray-100/25 border border-gray-100/40 rounded focus:border-gray-100 outline-none
+                  transition duration-150 ease text-sm md:text-base `}
+                  type="text"
+                  name="title"
+                  id="title"
+                  value={values.title}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </Field>
+
+              <Field label="language">
+                <select
+                  value={values.language}
+                  name="language"
+                  id="language"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={`${
+                    errors.language && touched.language
+                      ? "!border-yellow-400"
+                      : ""
+                  } w-full p-2 bg-gray-100/25 border border-gray-100/40 rounded focus:border-gray-100 outline-none
+                  transition duration-150 ease text-sm md:text-base`}
+                >
+                  {languages.map((language, index) => (
+                    <option
+                      className="bg-[#b96f63] text-sm md:text-base"
+                      key={index}
+                      value={language}
+                    >
+                      {language}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+            </div>
+
+            <Field label="description">
+              <textarea
+                value={values.description}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="description"
+                id="description"
+                className={`${
+                  errors.description && touched.description
+                    ? "!border-yellow-400"
+                    : ""
+                } w-full min-h-[100px] bg-gray-100/25 border border-gray-100/40 rounded focus:border-gray-100 outline-none
+                transition duration-150 ease text-sm md:text-base`}
+              ></textarea>
+            </Field>
+
+            <Field label="content">
+              <CodeEditor
+                id="content"
+                name="content"
+                value={values.content}
+                language={values.language}
+                placeholder="Please enter your snippet code here"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                padding={15}
+                className={`${
+                  errors.content && touched.content ? "!border-yellow-400" : ""
+                } transition duration-150 ease rounded bg-[#161b22] border border-gray-100/20 focus-within:border-gray-100 `}
+                style={{
+                  minHeight: "150px",
+                  fontSize: 13,
+                  fontFamily:
+                    "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+                }}
+              />
+            </Field>
+
+            <div className="flex justify-center md:justify-end gap-4 mr-2">
+              <Button
+                type="button"
+                variant="outline"
+                className="hover:bg-gray-200/20 hover:!text-white"
+                onClick={onClose}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className=" text-[#fff] bg-[#219653] border-2 border-transparent hover:bg-transparent hover:text-[#36ff8d] hover:border-[#37eb85c5]"
+              >
+                {loading ? <Spinner /> : "Submit"}
+              </Button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
 

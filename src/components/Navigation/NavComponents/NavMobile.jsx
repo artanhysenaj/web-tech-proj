@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import Button from "../../UI/Button/Button";
 const NavMobile = ({ showMobileNav, closeNav }) => {
   const { authenticated, logout, user } = useAuthContext();
-  const firstName = user?.user_display_name.split(" ").at(0);
+  const firstName = user?.fullName?.split(" ").at(0);
   const { key } = useLocation();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const NavMobile = ({ showMobileNav, closeNav }) => {
             <img
               onClick={() => {}}
               className="w-11 h-11 rounded-full"
-              src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+              src={user?.avatar_urls?.[96]}
               alt="user profile"
             />
           )}
