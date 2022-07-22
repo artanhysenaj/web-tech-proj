@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import CodeEditor from "@uiw/react-textarea-code-editor";
 const Code = (props) => {
-  const { code: snippet, showCode, language, editable } = props;
-  const [code, setCode] = useState(snippet);
+  const { content, showCode, language, editable } = props;
+  const [code, setCode] = useState(null);
   const [copyText, setCopyText] = useState("Copy");
 
   const copyCodeHandler = async () => {
@@ -23,7 +23,7 @@ const Code = (props) => {
           {copyText}
         </button>
         <CodeEditor
-          value={code}
+          value={code ?? content}
           language={language}
           disabled={!editable}
           placeholder="Please enter your snippet code here"

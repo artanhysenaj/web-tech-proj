@@ -3,12 +3,11 @@ import { Route, Routes } from "react-router-dom";
 import { useAuthContext } from "./store/AuthContext/AuthContext";
 import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
-
 import AboutPage from "./pages/AboutPage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/Auth/LoginPage";
+import RegisterPage from "./pages/Auth/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ForgotPasswordPage from "./pages/Auth/ForgotPasswordPage";
 import BlogPage from "./pages/Blog/Blogs";
 import Blog from "./pages/Blog/Blog";
 

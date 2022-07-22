@@ -10,8 +10,8 @@ const Button = (props) => {
       className={`${className} ${variantClass} px-3 py-1 rounded border transition-all duration-200`}
       {...config}
     >
-      {label}
       {children}
+      {label}
     </button>
   );
 };

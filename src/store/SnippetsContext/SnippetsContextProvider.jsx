@@ -24,7 +24,24 @@ const SnippetsContextProvider = (props) => {
       prevState.filter((snippet) => snippet.id !== id)
     );
   };
-  const updateSnippet = (id, snippet) => {};
+  const updateSnippet = (id, snippet) => {
+    setSnippets((prevState) =>
+      prevState.map((snippetItem) => {
+        if (snippetItem.id === id) {
+          return {
+            ...snippetItem,
+            ...{
+              title: { rendered: snippet.title },
+              content: { rendered: snippet.content },
+              excerpt: { rendered: snippet.excerpt },
+              acf: { ...snippet.fields },
+            },
+          };
+        }
+        return snippetItem;
+      })
+    );
+  };
   const value = {
     snippets,
     hasMore,

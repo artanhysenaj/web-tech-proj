@@ -46,10 +46,10 @@ const Navigation = (props) => {
             onClick={logout}
             className="mx-2 w-8 h-8 sm:w-12 sm:h-12 rounded-full ring-2 ring-offset-4 ring-[#ffffff] ring-offset-[#e53e3e] hover:cursor-pointer hover:ring-0
           hover:ring-offset-0 hover:scale-125 transition-all duration-200"
-            src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+            src={user?.avatar_urls?.[96]}
             alt="user profile"
           />
-          <p className="mr-2 invisible sm:visible">{user.user_display_name}</p>
+          <p className="mr-2 invisible sm:visible">{user.fullName}</p>
         </div>
       )}
 

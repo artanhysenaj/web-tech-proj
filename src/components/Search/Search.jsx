@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useRef, useState } from "react";
+import { faSearch, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useSnippetsContext } from "../../store/SnippetsContext/SnippetsContext";
@@ -7,6 +7,7 @@ const Search = ({ onSearch, loading }) => {
   const { allowInfiniteScroll } = useSnippetsContext();
   const [searchValue, setSearchValue] = useState("");
   const [showFullInput, setShowFullInput] = useState(false);
+  const searchInputRef = useRef(null);
 
   useEffect(() => {
     if (searchValue.trim().length === 0) return;
@@ -24,9 +25,12 @@ const Search = ({ onSearch, loading }) => {
   const handleButtonClick = () => {
     if (!showFullInput) {
       setShowFullInput(true);
+      searchInputRef.current.focus();
       return;
     }
-    if (searchValue.trim().length !== 0) onSearch(searchValue);
+    setSearchValue("");
+    setShowFullInput(false);
+    allowInfiniteScroll(true);
   };
 
   const handleOnBlur = () => {
@@ -41,6 +45,7 @@ const Search = ({ onSearch, loading }) => {
       } transition-all duration-200 ease-in-out md:w-full`}
     >
       <input
+        ref={searchInputRef}
         className={`
         ${
           showFullInput
@@ -64,9 +69,9 @@ const Search = ({ onSearch, loading }) => {
         onClick={handleButtonClick}
       >
         <FontAwesomeIcon
-          icon={faSearch}
+          icon={showFullInput ? faX : faSearch}
           className={`md:text-2xl text-xl ${
-            loading ? "animate-spin" : ""
+            loading && showFullInput ? "animate-spin" : ""
           } m-auto hover:cursor-pointer hover:scale-110 transition-all duration-200 ease-in-out`}
         />
       </button>
