@@ -1,26 +1,31 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useFetch } from "./../hooks/use-fetch";
-import { login } from "../api/Authentication/Authentication";
-import LoginForm from "../components/AuthForm/LoginForm";
-import Logo from "../components/UI/Logo/Logo";
-import Wrapper from "../components/UI/Wrapper/Wrapper";
-import { useAuthContext } from "../store/AuthContext/AuthContext";
+import { useFetch } from "../../hooks/use-fetch";
+import { login } from "../../api/Authentication/Authentication";
+import LoginForm from "../../components/AuthForm/LoginForm";
+import Logo from "../../components/UI/Logo/Logo";
+import Wrapper from "../../components/UI/Wrapper/Wrapper";
+import { useAuthContext } from "../../store/AuthContext/AuthContext";
 const LoginPage = (props) => {
   const navigate = useNavigate();
   const context = useAuthContext();
   const { authenticated } = context;
-  const { sendRequest: fetchLogin, loading, error } = useFetch();
+  const { sendRequest: fetchLogin, loading } = useFetch();
 
   useEffect(() => {
-    if (authenticated) toast.success("Login Successful");
-    if (error) toast.error(error.code || "Something went wrong");
+    // if (error) toast.error(error.code || "Something went wrong");
     if (authenticated && !loading) navigate("/");
-  }, [navigate, authenticated, loading, error]);
+  }, [navigate, authenticated, loading]);
 
   const loginHandler = async (data) => {
-    fetchLogin(login.bind(null, data.email, data.password), context.login);
+    fetchLogin(
+      () => login(data.email, data.password),
+      (data) => {
+        context.login(data);
+        toast.success("Login Successful");
+      }
+    );
   };
 
   return (
@@ -33,10 +38,7 @@ const LoginPage = (props) => {
             <p>and interact with your snippets</p>
           </div>
         </div>
-        <LoginForm
-          isLoading={loading}
-          authFunction={loginHandler}
-        />
+        <LoginForm isLoading={loading} authFunction={loginHandler} />
         <div>
           <p>
             <span

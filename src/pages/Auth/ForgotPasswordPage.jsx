@@ -1,9 +1,9 @@
 import React from "react";
-import ForgotPasswordForm from "../components/AuthForm/ForgotPasswordForm";
-import Logo from "../components/UI/Logo/Logo";
-import Wrapper from "../components/UI/Wrapper/Wrapper";
-import { useFetch } from "../hooks/use-fetch";
-import { forgotPassword } from "../api/Authentication/Authentication";
+import ForgotPasswordForm from "../../components/AuthForm/ForgotPasswordForm";
+import Logo from "../../components/UI/Logo/Logo";
+import Wrapper from "../../components/UI/Wrapper/Wrapper";
+import { useFetch } from "../../hooks/use-fetch";
+import { forgotPassword } from "../../api/Authentication/Authentication";
 
 const ForgotPasswordPage = (props) => {
   const { sendEmail, validateCode, resetPassword } = forgotPassword;

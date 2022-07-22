@@ -17,7 +17,7 @@ const Input = (props) => {
         )}
       </label>
       <input
-        className={`w-full py-2 px-3 transition-all text-[#f5f5f5] border-b-2 bg-transparent outline-none  ${
+        className={`w-full py-2 px-3 transition-all text-white border-b-2 bg-transparent outline-none placeholder:text-gray-300 ${
           inputHasError ? "border-[#d2be4b]" : null
         }`}
         {...config}
