@@ -17,7 +17,7 @@ const NavMobile = ({ showMobileNav, closeNav }) => {
 
   if (!showMobileNav) return null;
   return (
-    <div className="fixed top-0 bg-[#e53e3e] shadow-2xl shadow-gray-800 -ml-2 w-full h-screen rounded p-3 ">
+    <div className="fixed z-[99] top-0 bg-[#e53e3e] shadow-2xl shadow-gray-800 -ml-2 w-full h-screen rounded p-3 ">
       <div className="py-3 mb-4 flex justify-between border-b border-[#f4f4f4]/20">
         <div className="flex items-end ">
           {authenticated && (

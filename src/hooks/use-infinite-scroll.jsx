@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { noDuplicates } from "../helpers/helperFunctions";
+import { useSnippetsContext } from "../store/SnippetsContext/SnippetsContext";
 
 const url = process.env.REACT_APP_WP_REST_API_URL;
 const useInfiniteScroll = ({ query, perPage, offset }) => {
-  const [snippets, setSnippets] = useState([]);
+  const { addSnippet, setHasMore, hasMore } = useSnippetsContext();
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [hasMore, setHasMore] = useState(false);
 
   useEffect(() => {
+    if (!hasMore) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     setError(false);
     let cancel;
@@ -23,10 +27,7 @@ const useInfiniteScroll = ({ query, perPage, offset }) => {
           }
         );
 
-        setSnippets((prevState) => [
-          ...prevState,
-          ...noDuplicates(prevState, response.data),
-        ]);
+        addSnippet(response.data);
         setHasMore(response.data.length === perPage);
         setLoading(false);
       } catch (error) {
@@ -41,9 +42,8 @@ const useInfiniteScroll = ({ query, perPage, offset }) => {
     fetchSnippets();
 
     return () => cancel();
-  }, [query, perPage, offset]);
-
-  return { snippets, loading, error, hasMore };
+  }, [query, perPage, offset, addSnippet, setHasMore, hasMore]);
+  return { loading, error, hasMore };
 };
 
 export default useInfiniteScroll;
