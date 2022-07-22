@@ -8,9 +8,10 @@ import Logo from "./../UI/Logo/Logo";
 import { useAuthContext } from "../../store/AuthContext/AuthContext";
 import { useCallback } from "react";
 import Button from "../UI/Button/Button";
-const Navigation = (props) => {
+import NavUserDropDown from "./NavComponents/NavUserDropDown";
+const Navigation = () => {
   const [showMobileNav, setShowMobileNav] = useState(false);
-  const { authenticated, logout, user } = useAuthContext();
+  const { authenticated } = useAuthContext();
 
   const onCloseMobileNavHandler = useCallback(
     () => setShowMobileNav(false),
@@ -19,19 +20,8 @@ const Navigation = (props) => {
   const onOpenMobileNavHandler = () => setShowMobileNav(true);
 
   return (
-    <nav className="relative w-full h-full sm:h-[70px] flex justify-between items-center ">
+    <nav className="relative w-full h-full sm:h-[70px] flex justify-between items-center z-[98]">
       <Logo />
-
-      <FontAwesomeIcon
-        icon={faBars}
-        className="mr-2 text-xl sm:text-3xl md:hidden"
-        onClick={onOpenMobileNavHandler}
-      />
-
-      <NavMobile
-        showMobileNav={showMobileNav}
-        closeNav={onCloseMobileNavHandler}
-      />
 
       <ul className="hidden md:flex md:gap-4">
         <NavItem to="/" routeName="Home" />
@@ -41,27 +31,32 @@ const Navigation = (props) => {
       </ul>
 
       {authenticated && (
-        <div className="hidden md:flex flex-row-reverse items-center">
-          <img
-            onClick={logout}
-            className="mx-2 w-8 h-8 sm:w-12 sm:h-12 rounded-full ring-2 ring-offset-4 ring-[#ffffff] ring-offset-[#e53e3e] hover:cursor-pointer hover:ring-0
-          hover:ring-offset-0 hover:scale-125 transition-all duration-200"
-            src={user?.avatar_urls?.[96]}
-            alt="user profile"
-          />
-          <p className="mr-2 invisible sm:visible">{user.fullName}</p>
+        <div>
+          <NavUserDropDown />
         </div>
       )}
 
       {!authenticated && (
-        <ul className="hidden md:flex gap-2">
-          <Button variant="outline">
-            <Link to="/login">Sign-In</Link>
-          </Button>
-          <Button>
-            <Link to="/register">Sign-Up</Link>
-          </Button>
-        </ul>
+        <>
+          <FontAwesomeIcon
+            icon={faBars}
+            className="mr-2 text-xl sm:text-3xl md:hidden"
+            onClick={onOpenMobileNavHandler}
+          />
+
+          <NavMobile
+            showMobileNav={showMobileNav}
+            closeNav={onCloseMobileNavHandler}
+          />
+          <ul className="hidden md:flex gap-2">
+            <Button variant="outline">
+              <Link to="/login">Sign-In</Link>
+            </Button>
+            <Button>
+              <Link to="/register">Sign-Up</Link>
+            </Button>
+          </ul>
+        </>
       )}
     </nav>
   );
