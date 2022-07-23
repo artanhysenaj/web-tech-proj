@@ -23,19 +23,20 @@ const Search = ({ onSearch, loading }) => {
   };
 
   const handleButtonClick = () => {
-    if (!showFullInput) {
-      setShowFullInput(true);
-      searchInputRef.current.focus();
+    if (showFullInput) {
+      setSearchValue("");
+      setShowFullInput(false);
+      allowInfiniteScroll(true);
       return;
     }
-    setSearchValue("");
-    setShowFullInput(false);
-    allowInfiniteScroll(true);
+    setShowFullInput(true);
+    searchInputRef.current.focus();
   };
 
   const handleOnBlur = () => {
     if (searchValue.trim().length !== 0) return;
     setShowFullInput(false);
+    allowInfiniteScroll(true);
   };
 
   return (

@@ -17,3 +17,7 @@ export const newSnippet = async (data) => {
 export const getSearchSnippet = async (keyword) => {
   return await axios.get(url + "/wp-json/wp/v2/snippets?search=" + keyword);
 };
+
+export const getAllSnippets = async () => {
+  return await axios.get(url + "/wp-json/wp/v2/snippets?per_page=100");
+};

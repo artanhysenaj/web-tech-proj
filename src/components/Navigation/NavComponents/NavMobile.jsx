@@ -1,12 +1,16 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import NavItem from "./NavItem";
 import { useAuthContext } from "../../../store/AuthContext/AuthContext";
 import { useEffect } from "react";
+import { Dropdown } from "flowbite-react";
+import { languages } from "../../../data/helperData";
 import Button from "../../UI/Button/Button";
 const NavMobile = ({ showMobileNav, closeNav }) => {
+  const navigate = useNavigate();
   const { authenticated, logout, user } = useAuthContext();
   const firstName = user?.fullName?.split(" ").at(0);
   const { key } = useLocation();
@@ -44,7 +48,21 @@ const NavMobile = ({ showMobileNav, closeNav }) => {
       <ul className="flex flex-col gap-2 mt-10  pb-6 border-b border-[#f4f4f4]/20">
         <NavItem to="/" routeName="Home" />
         <NavItem to="/blog" routeName="Blog" />
-        <NavItem to="/language" routeName="Language" />
+        <Dropdown label="Languages" inline={true}>
+          {languages.map((language, index) => (
+            <Dropdown.Item
+              key={index}
+              onClick={() =>
+                navigate({
+                  pathname: `/languages/${language}`,
+                  params: { language },
+                })
+              }
+            >
+              {language}
+            </Dropdown.Item>
+          ))}
+        </Dropdown>
         <NavItem to="/about" routeName="About" />
       </ul>
 
