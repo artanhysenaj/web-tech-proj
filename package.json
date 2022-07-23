@@ -24,7 +24,8 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.4",
     "web-vitals": "^2.1.4",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "@babel/eslint-parser": "^7.5.4"
   },
   "eslintConfig": {
     "extends": [
