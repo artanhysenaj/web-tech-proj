@@ -1,46 +1,198 @@
 import React from 'react'
 import Logo from "../components/UI/Logo/Logo";
+import Easy from "../assets/easy.svg"
+import People from "../assets/people.svg"
+import Book from "../assets/book.svg"
+import Codee from "../assets/codee.svg"
 
 const AboutPage = (props)=>{
   
 return(
 <>  
-  {/* <h1 className="text-center text-5xl mt-[200px] mb-[75px] font-bold text-white">
-    About Us
-  </h1> */}
   <div className="flex justify-center items-center">
-          <Logo />
-          <div className="ml-4">
-            <h2 className="text-6xl font-bold text-white in-line">About Us</h2>
-          </div>
+    <Logo />
+      <div className="ml-4">
+        <h2 className="text-6xl font-bold text-white in-line">About Us</h2>
+      </div>
+  </div>
+  <div className="flex justify-center mt-[100px] items-center">
+    <div className="ml-4">
+      <h2 className="text-4xl font-bold text-white inline">What do we do?</h2>
     </div>
-  <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 space-around gap-9 mt-[80px] mb-[180px]">
+  </div>
+  <p className="mt-[50px] mx-4 md:mx-auto">We are a platform that you can use every day (Errday).
+                            We offer code snippets and everything that is beautiful in the world of programming.
+                            </p>
+<div class="shadow-[0_10px_60px_1px_rgba(0,0,0,0.3)]  bg-gradient-to-br from-[#e33e3e] to-[#614925] mb-20 rounded-lg p-10 mt-[100px]" >
+  <div className="flex justify-center mt-[5px] items-center">
+    <div className="ml-4">
+    <img src={Codee} alt="Logo" className="mx-[180px] sm:mx-[320px]  md:mx-[180px] lg:mx-[100px] ntent-center justify-center mb-[-20px]"
+       style={{
+        resizeMode: "contain",
+        height: 50,
+        width: 50
+      }}/>
+      <h2 className="text-4xl font-bold in-line mb-[50px] mt-10 text-black text-center md:text-left">Why choose us ?</h2>
+    </div>
+  </div>
+  <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-around gap-9 mt-[10px] mb-[50px] text-black">
     <div>
-      <h1 className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left">
+    <img src={Easy} alt="Logo" className="mx-[180px] sm:mx-[320px]  md:mx-[180px] lg:mx-[100px] ntent-center justify-center mb-[-20px]"
+       style={{
+        resizeMode: "contain",
+        height: 50,
+        width: 50
+      }}/>
+      <p className="text-3xl pb-[10px] mt-9 font-bold text-center md:text-left">
+      Easy to use</p>
+      <p className="mx-4 md:mx-auto">
+      Our site is an easy site to use and surf on, so it doesn't take much time to get used to it. It can also be used by people without experience.      </p>
+    </div>
+    <div>
+    <img src={People} alt="Logo" className="mx-[180px] sm:mx-[320px]  md:mx-[180px] lg:mx-[100px] ntent-center justify-center mb-[-20px]"
+       style={{
+        resizeMode: "contain",
+        height: 50,
+        width: 50
+      }}/>
+      <p className="text-3xl pb-[10px] mt-9 font-bold text-center md:text-left">
+      Large community</p>
+      <p className="mx-4 md:mx-auto">
+      The software community grows and expands every day, more and more productivity increases in the world of technology, and this is our goal.      </p>
+    </div>
+    <div>
+    <img src={Book} alt="Logo" className="mx-[180px] sm:mx-[320px]  md:mx-[180px] lg:mx-[100px] ntent-center justify-center mb-[-20px]"
+       style={{
+        resizeMode: "contain",
+        height: 50,
+        width: 50
+      }}/>
+      <p className="text-3xl pb-[10px] mt-9 font-bold text-center md:text-left">
+      Resources, tools</p>
+      <p className="mx-4 md:mx-auto">
+      The source of information here is very wide and for this it becomes a very used platform because productive information is distribute      </p>
+    </div>
+  </div>
+</div>
+  <div className="flex justify-center mt-[100px] items-center">
+    <div className="ml-4">
+      <h2 className="text-4xl font-bold text-white in-line">Web languages</h2>
+    </div>
+  </div>
+  <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 space-around gap-9 mt-[10px] mb-[180px]">
+    <div>
+      <ol className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left hover:text-indigo-300">
+      <a href="#" className="">
         JavaScript
-      </h1>
-      <p className="mx-4 md:mx-auto">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit placeat dolore est velit, unde culpa aliquid fuga saepe quidem aliquam!</p>
+      </a>
+      </ol>
+      <p className="mx-4 md:mx-auto">
+      JavaScript is a dynamic programming language that's used for web development, in web applications, for game development, and lots more. 
+      </p>
     </div>
     <div>
-    
-      <h1 className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left">
+      <ol className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left hover:text-indigo-300">
+      <a href="#" className="">
         ReactJs
-      </h1>
-      <p className="mx-4 md:mx-auto">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit placeat dolore est velit, unde culpa aliquid fuga saepe quidem aliquam!</p>
+      </a>
+      </ol>
+      <p className="mx-4 md:mx-auto">
+      ReactJS is JavaScript library used for building reusable UI components. According to React official documentation, following is the definition − React is a library for building composable user interfaces.
+      </p>
     </div>
     <div>
-      
-      <h1 className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left">
+      <ol className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left hover:text-indigo-300">
+      <a href="#" className="">
+        TypeScript
+      </a>
+      </ol>
+      <p className="mx-4 md:mx-auto">
+      TypeScript is a programming language developed and maintained by Microsoft.    </p>
+    </div>
+    <div>
+      <ol className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left hover:text-indigo-300">
+      <a href="#" className="">
+        Java
+      </a>
+      </ol>
+      <p className="mx-4 md:mx-auto">
+      Java is an object-oriented programming language that produces software for multiple platforms. When a programmer writes a Java application, the compiled code.  
+      </p>
+    </div>
+    <div>
+      <ol className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left hover:text-indigo-300">
+      <a href="#" className="">
+        VueJs
+      </a>
+      </ol>
+      <p className="mx-4 md:mx-auto">
+      VueJS is an open source progressive JavaScript framework used to develop interactive web interfaces. It is one of the famous frameworks used to simplify web development.
+      </p>
+    </div>
+    <div>
+      <ol className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left hover:text-indigo-300">
+      <a href="#" className="">
+        Angular
+      </a>
+      </ol>
+      <p className="mx-4 md:mx-auto">
+      Angular is a platform and framework for building single-page client applications using HTML and TypeScript. Angular is written in TypeScript.      </p>
+    </div>
+    <div>
+      <ol className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left hover:text-indigo-300">
+      <a href="#" className="">
+        Rust
+      </a>
+      </ol>
+      <p className="mx-4 md:mx-auto">
+      Rust is the term we use to describe red iron oxides produced when ferrous metals corrode. Rust is the common name for the chemicals that result when iron reacts with oxygen and water.
+      </p>
+    </div>
+    <div>
+      <ol className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left hover:text-indigo-300">
+      <a href="#" className="">
+        Ruby
+      </a>
+      </ol>
+      <p className="mx-4 md:mx-auto">
+      Ruby is an open source, interpreted, object-oriented programming language created by Yukihiro Matsumoto, who chose the gemstone's name to suggest "a jewel of a language."      </p>
+    </div>
+    <div>
+      <ol className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left hover:text-indigo-300">
+      <a href="#" className="">
         ExpressJs
-      </h1>
-      <p className="mx-4 md:mx-auto">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit placeat dolore est velit, unde culpa aliquid fuga saepe quidem aliquam!</p>
+      </a>
+      </ol>
+      <p className="mx-4 md:mx-auto">
+      Express is a node js web application framework that provides broad features for building web and mobile applications. It is used to build a single page, multipage, and hybrid web application.
+      </p>
     </div>
     <div>
-      
-      <h1 className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left">
-        NodeJs
-      </h1>
-      <p className="mx-4 md:mx-auto">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit placeat dolore est velit, unde culpa aliquid fuga saepe quidem aliquam!</p>
+      <ol className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left hover:text-indigo-300">
+      <a href="#" className="">
+        HTML
+      </a>
+      </ol>
+      <p className="mx-4 md:mx-auto">
+      HTML (HyperText Markup Language) is the code that is used to structure a web page and its content. For example, content could be structured within a set of paragraphs.      </p>
+    </div>
+    <div>
+      <ol className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left hover:text-indigo-300">
+      <a href="#" className="">
+        CSS
+      </a>
+      </ol>
+      <p className="mx-4 md:mx-auto">
+      Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a document written in HTML or XML (including XML dialects such as SVG, MathML or XHTML).      </p>
+    </div>
+    <div>
+      <ol className="text-3xl text-white pb-[10px] mt-9 font-bold text-center md:text-left hover:text-indigo-300">
+      <a href="#" className="">
+        JSON
+      </a>
+      </ol>
+      <p className="mx-4 md:mx-auto">
+      JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.      </p>
     </div>
   </div>
 
@@ -54,9 +206,6 @@ return(
           </div>
     </div>
       <div className="flex flex-col text-center w-full mb-12">
-        {/* <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">
-          Contact Us
-        </h1> */}
         <p className="lg:w-2/3 mx-auto mt-5 leading-relaxed text-white">
           For all enquiries, please email us using the form below
         </p>
