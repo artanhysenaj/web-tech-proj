@@ -4,25 +4,7 @@ import { Formik, Form } from "formik";
 import Field from "./Field";
 import Button from "../../UI/Button/Button";
 import Spinner from "../../shared/Spinner/Spinner";
-
-const languages = [
-  "text",
-  "JavaScript",
-  "TypeScript",
-  "Java",
-  "JavaScript React",
-  "TypeScript React",
-  "Vue",
-  "Angular",
-  "Go",
-  "C++",
-  "C#",
-  "Rust",
-  "Ruby",
-  "CSS",
-  "HTML",
-  "JSON",
-];
+import { languages } from "../../../data/helperData";
 
 const validateValues = (values) => {
   const isEmpty = (value) => value.trim().length === 0;
@@ -160,7 +142,7 @@ const SnippetForm = ({ onClose, loading, onSubmit, snippet }) => {
                 type="submit"
                 variant="outline"
                 disabled={isSubmitting}
-                className="hover:bg-[#219653]/40 !text-[#36ff8d] border-[#37eb85c5]"
+                className="hover:!bg-[#219653]/40 !text-[#36ff8d] border-[#37eb85c5]"
               >
                 {loading ? <Spinner /> : "Submit"}
               </Button>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import NavMobile from "./NavComponents/NavMobile";
@@ -9,16 +9,22 @@ import { useAuthContext } from "../../store/AuthContext/AuthContext";
 import { useCallback } from "react";
 import Button from "../UI/Button/Button";
 import NavUserDropDown from "./NavComponents/NavUserDropDown";
+import { Dropdown } from "flowbite-react";
+import { languages } from "../../data/helperData";
+import { useEffect } from "react";
 const Navigation = () => {
   const [showMobileNav, setShowMobileNav] = useState(false);
   const { authenticated } = useAuthContext();
+  const navigate = useNavigate();
 
   const onCloseMobileNavHandler = useCallback(
     () => setShowMobileNav(false),
     []
   );
   const onOpenMobileNavHandler = () => setShowMobileNav(true);
-
+  useEffect(() => {
+    console.log("navigation");
+  }, []);
   return (
     <nav className="relative w-full h-full sm:h-[70px] flex justify-between items-center z-[98]">
       <Logo />
@@ -26,7 +32,21 @@ const Navigation = () => {
       <ul className="hidden md:flex md:gap-4">
         <NavItem to="/" routeName="Home" />
         <NavItem to="/blog" routeName="Blog" />
-        <NavItem to="/language" routeName="Language" />
+        <Dropdown label="Languages" inline={true}>
+          {languages.map((language, index) => (
+            <Dropdown.Item
+              key={index}
+              onClick={() =>
+                navigate({
+                  pathname: `/languages/${language}`,
+                  params: { language },
+                })
+              }
+            >
+              {language}
+            </Dropdown.Item>
+          ))}
+        </Dropdown>
         <NavItem to="/about" routeName="About" />
       </ul>
 

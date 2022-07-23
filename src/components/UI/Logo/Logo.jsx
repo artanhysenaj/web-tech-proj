@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.png";
-const Logo = (props) => {
+const Logo = () => {
   const navigate = useNavigate();
   return (
     <div
