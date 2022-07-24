@@ -11,7 +11,7 @@ export const useFetch = () => {
       setError(null);
       try {
         const response = await fetchFunction();
-        console.log("here", response);
+        // console.log("here", response);
         applyFunction && applyFunction(response.data);
         setLoading(false);
         setError(null);

@@ -67,7 +67,7 @@ export const forgotPassword = {
     });
   },
   resetPassword: async (email, code, password) => {
-    return await axios.post(url + "/wp-json/bdpwr/v1/reset-password", {
+    return await axios.post(url + "/wp-json/bdpwr/v1/set-password", {
       email: email,
       code: code,
       password: password,
