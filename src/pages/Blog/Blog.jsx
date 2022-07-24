@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { getBlog } from "../../api/Blog/Blog";
 import { BlogUser } from "../../components/BlogUser/BlogUser";
+import CodePenComponent from "../../components/CodePenComponent/CodePenComponent";
 import LoadingBoundary from "../../components/shared/LoadingBoundary/LoadingBoundary";
 import useQuery from "../../hooks/useQuery";
 
@@ -24,6 +25,7 @@ const Blog = () => {
           dangerouslySetInnerHTML={{ __html: post?.content?.rendered }}
         ></div>
       </div>
+      {/* <CodePenComponent /> */}
     </LoadingBoundary>
   );
 };
