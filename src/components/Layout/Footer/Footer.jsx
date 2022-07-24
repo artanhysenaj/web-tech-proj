@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../../UI/Logo/Logo";
 const Footer = (props) => {
   return (
-    <footer className="sm:max-h-22 flex flex-col sm:flex-row justify-around items-center border-t-2 border-gray-300 max-w-[#900] mx-2 sm:mx-0 p-6 ">
+    <footer className="sm:max-h-22 flex flex-col sm:flex-row justify-around items-center border-t-2 border-gray-300 max-w-[#900] mx-2 sm:mx-0 p-6 md:mt-20">
       <Logo />
       <ul className="text-center my-3 font-bold md:flex gap-4">
         <li className="hover:underline hover:cursor-pointer">

@@ -4,7 +4,6 @@ import BlogPost from "../../components/BlogPost/BlogPost";
 import LoadingBoundary from "../../components/shared/LoadingBoundary/LoadingBoundary";
 import PostsList from "../../components/shared/PostsList/PostsList";
 import useQuery from "../../hooks/useQuery";
-import { getAllRoutes } from "../../api/shared/index";
 
 const BlogPage = (props) => {
   const { data: posts, error, isLoading } = useQuery(getBlogPosts);
