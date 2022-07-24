@@ -10,6 +10,8 @@ import ForgotPasswordPage from "./pages/Auth/ForgotPasswordPage";
 import BlogPage from "./pages/Blog/Blogs";
 import Blog from "./pages/Blog/Blog";
 import DashboardPage from "./pages/User/DashboardPage";
+import MySnippets from "./components/Dashboard/DashComponents/MySnippets";
+import MyProfile from "./components/Dashboard/DashComponents/MyProfile";
 
 function App() {
   return (
@@ -25,8 +27,8 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/dashboard" element={<DashboardPage />}>
-              <Route path="settings" element={<h1>setr</h1>} />
-              <Route path="my-snippets" element={<h1>snippets</h1>} />
+              <Route path="my-profile" element={<MyProfile />} />
+              <Route path="my-snippets" element={<MySnippets />} />
             </Route>
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="*" element={<NotFoundPage />} />

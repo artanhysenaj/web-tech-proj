@@ -44,8 +44,15 @@ export const register = async (
   });
 };
 
-export const updateUser = async (token, username, password) => {};
-export const changePassword = async (token, oldPassword, newPassword) => {};
+export const updateUser = async (newUserData) => {
+  return await axios.post(url + "/wp-json/wp/v2/users/me", newUserData);
+};
+
+export const changePassword = async (newPassword) => {
+  return await axios.put(url + "/wp-json/wp/v2/users/me", {
+    password: newPassword,
+  });
+};
 
 export const forgotPassword = {
   sendEmail: async (email) => {

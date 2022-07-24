@@ -5,16 +5,20 @@ import Wrapper from "../components/UI/Wrapper/Wrapper";
 import DataBoundary from "../components/UI/DataBoundary/DataBoundary";
 import useInfiniteScroll from "../hooks/use-infinite-scroll";
 import { useSnippetsContext } from "../store/SnippetsContext/SnippetsContext";
+import { useEffect } from "react";
 
 const HomePage = (props) => {
-  const { snippets } = useSnippetsContext();
+  const { snippets, allowInfiniteScroll } = useSnippetsContext();
   const [offset, setOffset] = useState(0);
   const { loading, error, hasMore } = useInfiniteScroll({
     query: "snippets",
     perPage: 6,
     offset,
   });
-
+  useEffect(() => {
+    allowInfiniteScroll(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const observer = useRef();
   const lastElementRef = useCallback(
     (node) => {
@@ -33,7 +37,12 @@ const HomePage = (props) => {
   const outlet = snippets.map((snippet, index, arr) => {
     if (arr.length === index + 1) {
       return (
-        <Snippet ref={lastElementRef} key={snippet.id} snippet={snippet} />
+        <Snippet
+          ref={lastElementRef}
+          key={snippet.id}
+          snippet={snippet}
+          hasAuthorPermissions={false}
+        />
       );
     } else return <Snippet key={snippet.id} snippet={snippet} />;
   });

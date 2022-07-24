@@ -3,7 +3,7 @@ const Button = (props) => {
   const { variant, className, children, label, ...config } = props;
 
   const primary = "bg-[#fff] text-[#333] hover:bg-transparent hover:text-white";
-  const outline = "bg-transparent text-white hover:bg-white hover:text-[#333]";
+  const outline = "bg-transparent text-white hover:bg-white/10 ";
   const variantClass = variant === "outline" ? outline : primary;
   return (
     <button

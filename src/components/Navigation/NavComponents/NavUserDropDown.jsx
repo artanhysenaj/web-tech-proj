@@ -54,13 +54,13 @@ const NavUserDropDown = (props) => {
       </Dropdown.Item>
       <Dropdown.Divider />
       <Dropdown.Item>
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/dashboard/my-profile">Dashboard</Link>
       </Dropdown.Item>
       <Dropdown.Item>
-        <Link to="/settings">Settings</Link>
+        <Link to="/dashboard/my-profile">My Profile</Link>
       </Dropdown.Item>
       <Dropdown.Item>
-        <Link to="/my-snippets">My Snippets</Link>
+        <Link to="/dashboard/my-snippets">My Snippets</Link>
       </Dropdown.Item>
       <Dropdown.Divider />
       <Dropdown.Item onClick={logout}>Sign out</Dropdown.Item>
