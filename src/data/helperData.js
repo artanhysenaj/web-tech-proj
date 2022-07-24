@@ -1,0 +1,18 @@
+export const languages = [
+  "text",
+  "JavaScript",
+  "TypeScript",
+  "Java",
+  "JavaScript React",
+  "TypeScript React",
+  "Vue",
+  "Angular",
+  "Go",
+  "C++",
+  "C-Sharp",
+  "Rust",
+  "Ruby",
+  "CSS",
+  "HTML",
+  "JSON",
+];

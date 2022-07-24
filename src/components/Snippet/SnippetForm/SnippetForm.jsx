@@ -4,25 +4,7 @@ import { Formik, Form } from "formik";
 import Field from "./Field";
 import Button from "../../UI/Button/Button";
 import Spinner from "../../shared/Spinner/Spinner";
-
-const languages = [
-  "text",
-  "JavaScript",
-  "TypeScript",
-  "Java",
-  "JavaScript React",
-  "TypeScript React",
-  "Vue",
-  "Angular",
-  "Go",
-  "C++",
-  "C#",
-  "Rust",
-  "Ruby",
-  "CSS",
-  "HTML",
-  "JSON",
-];
+import { languages } from "../../../data/helperData";
 
 const validateValues = (values) => {
   const isEmpty = (value) => value.trim().length === 0;
@@ -121,7 +103,7 @@ const SnippetForm = ({ onClose, loading, onSubmit, snippet }) => {
                     ? "!border-yellow-400"
                     : ""
                 } w-full min-h-[100px] bg-gray-100/25 border border-gray-100/40 rounded focus:border-gray-100 outline-none
-                transition duration-150 ease text-sm md:text-base`}
+                transition p-2 duration-150 ease text-sm md:text-base`}
               ></textarea>
             </Field>
 
@@ -151,15 +133,16 @@ const SnippetForm = ({ onClose, loading, onSubmit, snippet }) => {
               <Button
                 type="button"
                 variant="outline"
-                className="hover:bg-gray-200/20 hover:!text-white"
+                className="hover:!bg-gray-200/20 hover:!text-white"
                 onClick={onClose}
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
+                variant="outline"
                 disabled={isSubmitting}
-                className=" text-[#fff] bg-[#219653] border-2 border-transparent hover:bg-transparent hover:text-[#36ff8d] hover:border-[#37eb85c5]"
+                className="hover:!bg-[#219653]/40 !text-[#36ff8d] border-[#37eb85c5]"
               >
                 {loading ? <Spinner /> : "Submit"}
               </Button>

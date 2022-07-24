@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { localStorageHelper } from "../../helpers/helperFunctions";
 import { AuthContext } from "./AuthContext";
@@ -10,24 +10,34 @@ const AuthContextProvider = (props) => {
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const { sendRequest } = useFetch();
+
   useEffect(() => {
+    const user = localStorageHelper.get("user");
+    if (user) {
+      setUser(user);
+      setAuthenticated(true);
+      login(user);
+    }
     if (authenticated) {
       sendRequest(
         () => getUserMe(),
-        (data) =>
+        (data) => {
           login({
             token: user.token,
+            email: user.user_email ?? user.email,
             avatar_urls: data.avatar_urls,
             fullName: data.name,
             userId: data.id,
-          })
+          });
+        }
       );
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authenticated, sendRequest]);
 
   const login = (user) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
+    if (authenticated) localStorageHelper.remove("user");
     localStorageHelper.set("user", user);
     setUser(user);
     setAuthenticated(true);
@@ -40,15 +50,8 @@ const AuthContextProvider = (props) => {
     toast.success("Logged out successfully");
   };
 
-  const loginOnReload = useCallback(() => {
-    setAuthenticated(false);
-    localStorageHelper.get("user") && login(localStorageHelper.get("user"));
-  }, []);
-
   return (
-    <AuthContext.Provider
-      value={{ authenticated, login, logout, user, loginOnReload }}
-    >
+    <AuthContext.Provider value={{ authenticated, login, logout, user }}>
       {props.children}
     </AuthContext.Provider>
   );

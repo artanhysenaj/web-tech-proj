@@ -100,7 +100,7 @@ const Snippet = React.forwardRef((props, ref) => {
 
         <div className="mt-1 flex justify-between">
           <section>
-            {authenticated && (
+            {authenticated && props.hasAuthorPermissions && (
               <>
                 <span
                   className="cursor-pointer text-[#333] mr-2 font-semibold text-[0.75rem] sm:text-[0.9rem] hover:underline"
