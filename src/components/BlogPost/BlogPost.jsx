@@ -26,7 +26,7 @@ const BlogPost = ({ className, ...item }) => {
               {item.title?.rendered}
             </h2>
           </div>
-          <h6>{item.date.split("T")[0]}</h6>
+          <h6 className="min-w-max">{item.date.split("T")[0]}</h6>
         </div>
         <div
           onClick={(e) => {
