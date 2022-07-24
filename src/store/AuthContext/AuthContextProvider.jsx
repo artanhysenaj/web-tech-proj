@@ -39,7 +39,6 @@ const AuthContextProvider = (props) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
     if (authenticated) localStorageHelper.remove("user");
     localStorageHelper.set("user", user);
-    // console.log("oi", user);
     setUser(user);
     setAuthenticated(true);
   };

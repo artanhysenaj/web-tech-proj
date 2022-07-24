@@ -1,61 +1,67 @@
-import React from "react";
-import Logo from "../../components/UI/Logo/Logo";
-import { Outlet, NavLink } from "react-router-dom";
+import Dashboard from "../../components/Dashboard/Dashboard";
+import Wrapper from "../../components/UI/Wrapper/Wrapper";
+import { useAuthContext } from "../../store/AuthContext/AuthContext";
+import { useFetch } from "../../hooks/use-fetch";
+import {
+  changePassword,
+  updateUser,
+} from "../../api/Authentication/Authentication";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const DashboardPage = (props) => {
-  const navigation = [
-    { name: "Dashboard", to: "/dashboard", current: true },
-    { name: "Settings", to: "settings", current: false },
-    { name: "My Snippets", to: "my-snippets", current: false },
-  ];
+  const navigate = useNavigate();
+  const { login, user, authenticated } = useAuthContext();
+  const { sendRequest, loading } = useFetch();
 
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
+  useEffect(() => {
+    if (!authenticated) {
+      navigate("/login");
+    }
+  }, [authenticated, navigate]);
+
+  let closeModal = () => {};
+  const closePasswordModalHandler = (closeModalFunction) =>
+    (closeModal = closeModalFunction);
+  const closeUserModalHandler = (closeModalFunction) =>
+    (closeModal = closeModalFunction);
+
+  const changePasswordHandler = (data) => {
+    sendRequest(
+      () => changePassword(data),
+      () => {
+        toast.success("Password changed successfully");
+        closeModal();
+      }
+    );
+  };
+  const editUserHandler = (data) => {
+    sendRequest(
+      () => updateUser(data),
+      (data) => {
+        toast.success("User updated successfully");
+        closeModal();
+        login({
+          token: user.token,
+          username: data.username,
+          email: user.user_email ?? user.email,
+          avatar_urls: data.avatar_urls,
+          fullName: data.name,
+          userId: data.id,
+        });
+      }
+    );
+  };
   return (
-    <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center outline h-full">
-            <div className="flex-shrink-0 mb-2">
-              <Logo />
-            </div>
-            <div className="hidden md:block h-full">
-              <div className="ml-10 flex items-center space-x-2  h-full">
-                {navigation.map((item) => (
-                  <NavLink
-                    key={item.name}
-                    to={item.to}
-                    className={({ isActive }) => {
-                      return `text-white border-b-2 border-transparent hover:border-gray-400 px-2 py-4  ${
-                        isActive ? "!border-white text-white" : ""
-                      }
-                      ${item.name === "Dashboard" ? "bg-gray-500/20" : ""}`;
-                    }}
-                  >
-                    {item.name}
-                  </NavLink>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <header className="shadow-2xl mt-2">
-          <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 className="text-xl font-bold text-gray-900">Dashboard</h1>
-          </div>
-        </header>
-        <main>
-          <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            {/* Replace with your content */}
-            <div className="px-4 py-6 sm:px-0">
-              <Outlet />
-            </div>
-            {/* /End replace */}
-          </div>
-        </main>
-      </div>
-    </>
+    <Wrapper>
+      <Dashboard
+        onChangePassword={changePasswordHandler}
+        onEditUser={editUserHandler}
+        onClosePasswordModal={closePasswordModalHandler}
+        onCloseUserModal={closeUserModalHandler}
+        loading={loading}
+      />
+    </Wrapper>
   );
 };
 

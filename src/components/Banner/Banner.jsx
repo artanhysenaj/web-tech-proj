@@ -11,7 +11,7 @@ import { useSnippetsContext } from "../../store/SnippetsContext/SnippetsContext"
 import SnippetModal from "../Snippet/SnippetComponents/SnippetModal";
 
 const Banner = (props) => {
-  const { authenticated } = useAuthContext();
+  const { authenticated, user } = useAuthContext();
   const { snippets, setAllSnippets } = useSnippetsContext();
   const [showNewSnippetForm, setShowNewSnippetForm] = useState(false);
 
@@ -34,7 +34,10 @@ const Banner = (props) => {
       () =>
         newSnippet({
           ...newSnippetData,
-          fields: { author: "1", language: newSnippetData.fields.language },
+          fields: {
+            author: user.userId,
+            language: newSnippetData.fields.language,
+          },
           status: "publish",
         }),
       (data) => {

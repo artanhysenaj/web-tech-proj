@@ -21,3 +21,9 @@ export const getSearchSnippet = async (keyword) => {
 export const getAllSnippets = async () => {
   return await axios.get(url + "/wp-json/wp/v2/snippets?per_page=100");
 };
+
+export const getMySnippet = async (userID) => {
+  return await axios.get(
+    url + "/wp-json/wp/v2/snippets?author=" + userID + "&per_page=100"
+  );
+};

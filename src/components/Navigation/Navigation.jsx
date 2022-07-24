@@ -11,7 +11,6 @@ import Button from "../UI/Button/Button";
 import NavUserDropDown from "./NavComponents/NavUserDropDown";
 import { Dropdown } from "flowbite-react";
 import { languages } from "../../data/helperData";
-import { useEffect } from "react";
 const Navigation = () => {
   const [showMobileNav, setShowMobileNav] = useState(false);
   const { authenticated } = useAuthContext();
@@ -22,9 +21,7 @@ const Navigation = () => {
     []
   );
   const onOpenMobileNavHandler = () => setShowMobileNav(true);
-  useEffect(() => {
-    console.log("navigation");
-  }, []);
+
   return (
     <nav className="relative w-full h-full sm:h-[70px] flex justify-between items-center z-[98]">
       <Logo />
