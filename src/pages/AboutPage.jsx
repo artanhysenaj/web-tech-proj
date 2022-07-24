@@ -5,6 +5,9 @@ import ContactForm from "../components/About/ContactForm";
 import Content from "../components/About/Content";
 
 const AboutPage = (props) => {
+  const sendContactFormHandler = (values) => {
+    console.log(values);
+  };
   return (
     <>
       <div className="flex justify-center mt-[100px] items-center">
@@ -31,7 +34,7 @@ const AboutPage = (props) => {
 
       <LanguagesInfo />
 
-      <ContactForm />
+      <ContactForm onSubmit={sendContactFormHandler} loading={false} />
     </>
   );
 };
