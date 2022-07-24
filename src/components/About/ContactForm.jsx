@@ -3,7 +3,7 @@ import Logo from "../UI/Logo/Logo";
 const ContactForm = (props) => {
   return (
     <div>
-      <section className="sm:mx-2 md:mx-auto text-gray-700 body-font relative">
+      <section className="sm:mx-2 md:mx-auto text-gray-700 relative">
         <div className="sm:mx-2 md:mx-auto container px-5 py-24 mx-auto p-2 sm:p-4 shadow-[0_10px_60px_1px_rgba(0,0,0,0.3)]  bg-gradient-to-br from-[#e33e3e] to-[#614925] mb-20 rounded-lg">
           <div className="flex justify-center items-center">
             <Logo />

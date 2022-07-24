@@ -5,13 +5,13 @@ import Book from "../../assets/book.svg";
 import Codee from "../../assets/codee.svg";
 const Content = (props) => {
   return (
-    <div class="shadow-[0_10px_60px_1px_rgba(0,0,0,0.3)]  bg-gradient-to-br from-[#e33e3e] to-[#614925] mb-20 rounded-lg p-10 mt-[100px]">
+    <div className="shadow-[0_10px_60px_1px_rgba(0,0,0,0.3)]  bg-gradient-to-br from-[#e33e3e] to-[#614925] mb-20 rounded-lg p-10 mt-[100px]">
       <div className="flex justify-center mt-[5px] items-center">
         <div className="ml-4">
           <img
             src={Codee}
             alt="Logo"
-            className="mx-[180px] sm:mx-[320px]  md:mx-[180px] lg:mx-[100px] ntent-center justify-center mb-[-20px]"
+            className="mx-auto sm:mx-[320px]  md:mx-[180px] lg:mx-[100px]  mb-[-20px]"
             style={{
               resizeMode: "contain",
               height: 50,
@@ -23,12 +23,12 @@ const Content = (props) => {
           </h2>
         </div>
       </div>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-around gap-9 mt-[10px] mb-[50px] text-black">
+      <div className="text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-around gap-4 md:gap-9 mt-[10px] mb-[50px] text-black">
         <div>
           <img
             src={Easy}
             alt="Logo"
-            className="mx-[180px] sm:mx-[320px]  md:mx-[180px] lg:mx-[100px] ntent-center justify-center mb-[-20px]"
+            className="mx-auto sm:mx-[320px]  md:mx-[180px] lg:mx-[100px] mb-[-20px]"
             style={{
               resizeMode: "contain",
               height: 50,
@@ -48,7 +48,7 @@ const Content = (props) => {
           <img
             src={People}
             alt="Logo"
-            className="mx-[180px] sm:mx-[320px]  md:mx-[180px] lg:mx-[100px] ntent-center justify-center mb-[-20px]"
+            className="mx-auto sm:mx-[320px]  md:mx-[180px] lg:mx-[100px] ntent-center justify-center mb-[-20px]"
             style={{
               resizeMode: "contain",
               height: 50,
@@ -68,7 +68,7 @@ const Content = (props) => {
           <img
             src={Book}
             alt="Logo"
-            className="mx-[180px] sm:mx-[320px]  md:mx-[180px] lg:mx-[100px] ntent-center justify-center mb-[-20px]"
+            className="mx-auto sm:mx-[320px]  md:mx-[180px] lg:mx-[100px]  mb-[-20px]"
             style={{
               resizeMode: "contain",
               height: 50,
