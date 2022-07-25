@@ -1,6 +1,5 @@
 import Modal from "../../../UI/Modal/Modal";
 import React from "react";
-import Spinner from "../../../shared/Spinner/Spinner";
 import Button from "../../../UI/Button/Button";
 import { Formik, Form } from "formik";
 import Field from "../../../Snippet/SnippetForm/Field";
@@ -10,8 +9,7 @@ const validateValues = (values) => {
   const isEmpty = (value) => value.trim().length === 0;
   const errors = {};
   for (let key in values) if (isEmpty(values[key])) errors[key] = "is empty";
-  if (values.password !== values.confirmPassword)
-    errors.confirmPassword = "does not match";
+
   return errors;
 };
 
@@ -111,17 +109,16 @@ const EditUserModal = ({ onClose, show, loading, onSubmit }) => {
                   variant="outline"
                   className="hover:!bg-gray-200/20 hover:!text-white"
                   onClick={onClose}
-                >
-                  Cancel
-                </Button>
+                  label="Cancel"
+                />
                 <Button
                   type="submit"
                   variant="outline"
                   disabled={isSubmitting}
                   className="hover:!bg-[#219653]/40 !text-[#36ff8d] border-[#37eb85c5]"
-                >
-                  {loading ? <Spinner /> : "Save"}
-                </Button>
+                  loading={loading}
+                  label="Save"
+                />
               </div>
             </Form>
           )}

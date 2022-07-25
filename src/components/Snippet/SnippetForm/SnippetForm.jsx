@@ -3,7 +3,6 @@ import CodeEditor from "@uiw/react-textarea-code-editor";
 import { Formik, Form } from "formik";
 import Field from "./Field";
 import Button from "../../UI/Button/Button";
-import Spinner from "../../shared/Spinner/Spinner";
 import { languages } from "../../../data/helperData";
 
 const validateValues = (values) => {
@@ -135,17 +134,16 @@ const SnippetForm = ({ onClose, loading, onSubmit, snippet }) => {
                 variant="outline"
                 className="hover:!bg-gray-200/20 hover:!text-white"
                 onClick={onClose}
-              >
-                Cancel
-              </Button>
+                label="Cancel"
+              />
               <Button
                 type="submit"
                 variant="outline"
                 disabled={isSubmitting}
                 className="hover:!bg-[#219653]/40 !text-[#36ff8d] border-[#37eb85c5]"
-              >
-                {loading ? <Spinner /> : "Submit"}
-              </Button>
+                loading={loading}
+                label="Submit"
+              />
             </div>
           </Form>
         )}

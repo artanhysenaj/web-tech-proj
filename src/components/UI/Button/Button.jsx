@@ -1,6 +1,8 @@
 import React from "react";
+
+import { Spinner } from "flowbite-react";
 const Button = (props) => {
-  const { variant, className, children, label, ...config } = props;
+  const { variant, className, children, label, loading, ...config } = props;
 
   const primary = "bg-[#fff] text-[#333] hover:bg-transparent hover:text-white";
   const outline = "bg-transparent text-white hover:bg-white/10 ";
@@ -11,7 +13,7 @@ const Button = (props) => {
       {...config}
     >
       {children}
-      {label}
+      {loading ? <Spinner color="success" /> : label}
     </button>
   );
 };

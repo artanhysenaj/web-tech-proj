@@ -1,6 +1,21 @@
 import React from "react";
+import Button from "../UI/Button/Button";
+import { Formik, Form } from "formik";
+import Field from "../Snippet/SnippetForm/Field";
 import Logo from "../UI/Logo/Logo";
-const ContactForm = (props) => {
+
+const validateValues = (values) => {
+  const isEmpty = (value) => value.trim().length === 0;
+  const errors = {};
+  for (let key in values) if (isEmpty(values[key])) errors[key] = "is empty";
+
+  return errors;
+};
+const ContactForm = ({ onSubmit, loading }) => {
+  const submitHandler = (values, { setSubmitting }) => {
+    setSubmitting(false);
+    onSubmit(values);
+  };
   return (
     <div>
       <section className="sm:mx-2 md:mx-auto text-gray-700 relative">
@@ -18,64 +33,105 @@ const ContactForm = (props) => {
               For all enquiries, please email us using the form below
             </p>
           </div>
-          <div className="lg:w-1/2 md:w-2/3 mx-auto">
-            <div className="flex flex-wrap -m-2">
-              <div className="p-2 w-1/2">
-                <div className="relative">
-                  <label
-                    htmlFor="name"
-                    className="leading-7 text-sm text-white font-bold"
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="type your name in here"
-                    className="w-full py-2 px-3 transition-all text-[#f5f5f5] border-b-2 bg-transparent outline-none  null hover:border-indigo-600"
-                  />
-                </div>
-              </div>
-              <div className="p-2 w-1/2">
-                <div className="relative">
-                  <label
-                    htmlFor="email"
-                    className="leading-7 text-sm text-white font-bold"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="type your email in here"
-                    className="w-full py-2 px-3 transition-all text-[#f5f5f5] border-b-2 bg-transparent outline-none  null hover:border-indigo-600"
-                  />
-                </div>
-              </div>
-              <div className="p-2 w-full">
-                <div className="relative">
-                  <label
-                    htmlFor="message"
-                    className="leading-7 text-sm text-white font-bold"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    placeholder="type your message in here"
-                    className="w-full bg-transparent text-white rounded border border-gray-300 focus:border-indigo-500 h-32 text-base outline-none  py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-                  ></textarea>
-                </div>
-              </div>
-              <div className="p-2 w-full">
-                <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                  Send
-                </button>
-              </div>
-            </div>
+          <div className="w-full p-4 text-white">
+            <Formik
+              initialValues={{
+                fullname: "",
+                email: "",
+                subject: "",
+                message: "",
+              }}
+              validate={validateValues}
+              onSubmit={submitHandler}
+            >
+              {({
+                values,
+                handleBlur,
+                errors,
+                touched,
+                handleChange,
+                isSubmitting,
+              }) => (
+                <Form>
+                  <div className="flex">
+                    <Field label="fullname">
+                      <input
+                        className={`${
+                          errors.fullname && touched.fullname
+                            ? "!border-yellow-400"
+                            : ""
+                        } w-full p-2 bg-gray-100/25 border border-gray-100/40 rounded focus:border-gray-100 outline-none
+                  transition duration-150 ease text-sm md:text-base `}
+                        type="text"
+                        name="fullname"
+                        id="fullname"
+                        value={values.fullname}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                    </Field>
+                    <Field label="email">
+                      <input
+                        className={`${
+                          errors.email && touched.email
+                            ? "!border-yellow-400"
+                            : ""
+                        } w-full p-2 bg-gray-100/25 border border-gray-100/40 rounded focus:border-gray-100 outline-none
+                  transition duration-150 ease text-sm md:text-base `}
+                        type="text"
+                        name="email"
+                        id="email"
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                    </Field>
+                  </div>
+                  <Field label="subject">
+                    <input
+                      className={`${
+                        errors.subject && touched.subject
+                          ? "!border-yellow-400"
+                          : ""
+                      } w-full p-2 bg-gray-100/25 border border-gray-100/40 rounded focus:border-gray-100 outline-none
+                  transition duration-150 ease text-sm md:text-base `}
+                      type="text"
+                      name="subject"
+                      id="subject"
+                      value={values.subject}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                  </Field>
+                  <Field label="message">
+                    <textarea
+                      className={`${
+                        errors.message && touched.message
+                          ? "!border-yellow-400"
+                          : ""
+                      } w-full p-2 bg-gray-100/25 border border-gray-100/40 rounded focus:border-gray-100 outline-none
+                  transition duration-150 ease text-sm md:text-base h-24`}
+                      type="text"
+                      name="message"
+                      id="message"
+                      value={values.message}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    ></textarea>
+                  </Field>
+
+                  <div className="flex justify-center md:justify-end gap-4 mt-4 md:mr-2">
+                    <Button
+                      type="submit"
+                      variant="outline"
+                      disabled={isSubmitting}
+                      loading={loading}
+                      label="Submit"
+                    />
+                  </div>
+                </Form>
+              )}
+            </Formik>
           </div>
         </div>
       </section>
