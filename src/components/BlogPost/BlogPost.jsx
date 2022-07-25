@@ -21,17 +21,20 @@ const BlogPost = ({ className, ...item }) => {
             <span className="text-black block w-[50px] h-[50px] rounded-full mr-[34px] bg-white">
               <BlogTitleChars data={item.title?.rendered} />
             </span>
-            <h2 className="text-3xl font-medium transition-opacity duration-75 ease-in-out cursor-pointer hover:text-gray-100">
+            <h2 className="lg:text-3xl font-medium transition-opacity duration-75 ease-in-out cursor-pointer hover:text-gray-100">
               {" "}
               {item.title?.rendered}
             </h2>
           </div>
-          <h6 className="min-w-max">{item.date.split("T")[0]}</h6>
+          <h6 className="min-w-max text-xs lg:text-base">
+            {item.date.split("T")[0]}
+          </h6>
         </div>
         <div
           onClick={(e) => {
             e.stopPropagation();
           }}
+          className="text-xs lg:text-base"
         >
           <ReadMore>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit,
