@@ -3,6 +3,7 @@ import Button from "../UI/Button/Button";
 import { Formik, Form } from "formik";
 import Field from "../Snippet/SnippetForm/Field";
 import Logo from "../UI/Logo/Logo";
+import { useRef } from "react";
 
 const validateValues = (values) => {
   const isEmpty = (value) => value.trim().length === 0;
@@ -12,9 +13,10 @@ const validateValues = (values) => {
   return errors;
 };
 const ContactForm = ({ onSubmit, loading }) => {
-  const submitHandler = (values, { setSubmitting }) => {
+  const formRef = useRef(null);
+  const submitHandler = (_, { setSubmitting }) => {
     setSubmitting(false);
-    onSubmit(values);
+    onSubmit(formRef.current);
   };
   return (
     <div>
@@ -52,7 +54,10 @@ const ContactForm = ({ onSubmit, loading }) => {
                 handleChange,
                 isSubmitting,
               }) => (
-                <Form>
+                <Form
+                  ref={formRef}
+                  // onSubmit={submitHandler}
+                >
                   <div className="flex">
                     <Field label="fullname">
                       <input
