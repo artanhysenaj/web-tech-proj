@@ -1,12 +1,28 @@
 import React from "react";
-
+import emailjs from "emailjs-com";
 import LanguagesInfo from "../components/About/LanguagesInfo";
 import ContactForm from "../components/About/ContactForm";
 import Content from "../components/About/Content";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const AboutPage = (props) => {
+  const [loadingEmail, setLoadingEmail] = useState(false);
   const sendContactFormHandler = (values) => {
+    setLoadingEmail(true);
     console.log(values);
+    emailjs
+      .sendForm(
+        "errday-email-service",
+        "errday-email-template",
+        values,
+        "k29O9bNxoEmMoehUK"
+      )
+      .then(() => toast.success("Email sent successfully"))
+      .catch((err) =>
+        toast.error(err.message || err.text || "Something went wrong")
+      )
+      .finally(() => setLoadingEmail(false));
   };
   return (
     <>
@@ -34,7 +50,7 @@ const AboutPage = (props) => {
 
       <LanguagesInfo />
 
-      <ContactForm onSubmit={sendContactFormHandler} loading={false} />
+      <ContactForm onSubmit={sendContactFormHandler} loading={loadingEmail} />
     </>
   );
 };
