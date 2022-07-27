@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CodeEditor from "@uiw/react-textarea-code-editor";
 const Code = (props) => {
   const { content, showCode, language, editable } = props;
-  const [code, setCode] = useState(null);
+  const [code, setCode] = useState(content);
   const [copyText, setCopyText] = useState("Copy");
 
   const copyCodeHandler = async () => {
