@@ -3,7 +3,8 @@ import React, { useState } from "react";
 const ReadMore = ({ children, className, maxCharacters = 30 }) => {
   const text = children;
   const [isReadMore, setIsReadMore] = useState(true);
-  const toggleReadMore = () => {
+  const toggleReadMore = (e) => {
+    e.stopPropagation();
     setIsReadMore(!isReadMore);
   };
   return (

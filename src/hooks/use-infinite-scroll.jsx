@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useSnippetsContext } from "../store/SnippetsContext/SnippetsContext";
@@ -10,7 +10,7 @@ const useInfiniteScroll = ({ query, perPage, offset }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!hasMore) {
       setLoading(false);
       return;

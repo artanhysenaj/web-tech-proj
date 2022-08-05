@@ -8,6 +8,7 @@ const BlogPost = ({ className, ...item }) => {
 
   function handleClick() {
     navigate(`${item.id}`);
+    console.log("fired");
   }
 
   return (
@@ -31,9 +32,9 @@ const BlogPost = ({ className, ...item }) => {
           </h6>
         </div>
         <div
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
+          // onClick={(e) => {
+          //   e.stopPropagation();
+          // }}
           className="text-xs lg:text-base"
         >
           <ReadMore>

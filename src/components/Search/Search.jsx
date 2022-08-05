@@ -22,7 +22,8 @@ const Search = ({ onSearch, loading }) => {
     if (e.target.value === "") allowInfiniteScroll(true);
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (e) => {
+    e.stopPropagation();
     if (showFullInput) {
       setSearchValue("");
       setShowFullInput(false);
@@ -33,7 +34,8 @@ const Search = ({ onSearch, loading }) => {
     searchInputRef.current.focus();
   };
 
-  const handleOnBlur = () => {
+  const handleOnBlur = (e) => {
+    e.stopImmediatePropagation();
     if (searchValue.trim().length !== 0) return;
     setShowFullInput(false);
     allowInfiniteScroll(true);

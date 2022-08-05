@@ -2,14 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  list-style: none;
-  /* outline: blue 1px solid; */
-}
+
 
 body {
   background-color: #e53e3e;
